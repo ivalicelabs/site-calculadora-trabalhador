@@ -237,20 +237,6 @@ function initSteppers(form) {
   });
 }
 
-function initRescisaoDefaults(form) {
-  const admission = form.elements.admission;
-  const dismissal = form.elements.dismissal;
-  if (!admission || !dismissal) return;
-  const today = new Date();
-  const iso = (d) => d.toISOString().slice(0, 10);
-  if (!dismissal.value) dismissal.value = iso(today);
-  if (!admission.value) {
-    const a = new Date(today);
-    a.setFullYear(a.getFullYear() - 2);
-    admission.value = iso(a);
-  }
-}
-
 const form = document.getElementById('calc-form');
 if (form) {
   const id = form.getAttribute('data-calc-id');
@@ -258,7 +244,6 @@ if (form) {
   const valueEl = document.querySelector('[data-result-value]');
   const breakdownEl = document.querySelector('[data-breakdown]');
   initSteppers(form);
-  initRescisaoDefaults(form);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();

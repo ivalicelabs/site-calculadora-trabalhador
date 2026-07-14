@@ -104,17 +104,18 @@
         <form id="calc-form" data-calc-id="hora_extra" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
       <div class="grid gap-6 sm:grid-cols-2">
-        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field" name="gross" type="text" inputmode="decimal" value="3.000,00" required></label>
-        <label class="block min-w-0 flex-1"><span class="field-label">Horas extras</span><input class="field" name="hours" type="number" min="0"  value="10"></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field" name="gross" type="text" inputmode="decimal" value="" placeholder="Ex: 3.000,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Horas extras</span><input class="field" name="hours" type="number" min="0"  value="" placeholder="Ex: 10" required></label>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <label class="block min-w-0 flex-1"><span class="field-label">Tipo</span>
-          <select class="field" name="overtimeType">
+          <select class="field" name="overtimeType" required>
+            <option value="" disabled selected>Selecione</option>
             <option value="WEEKDAY">50% (dias úteis)</option>
             <option value="SUNDAY_HOLIDAY">100% (domingo/feriado)</option>
           </select>
         </label>
-        <label class="block min-w-0 flex-1"><span class="field-label">Horas com adicional noturno</span><input class="field" name="nightHours" type="number" min="0"  value="0"></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Horas com adicional noturno</span><input class="field" name="nightHours" type="number" min="0"  value="" placeholder="0" ></label>
       </div>
           <button type="submit" class="btn-primary">Calcular</button>
         </form>

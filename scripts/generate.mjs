@@ -444,32 +444,32 @@ ${scripts()}`;
 }
 
 function formFields(id) {
-  const money = (name, label, value = '0,00') =>
-    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="text" inputmode="decimal" value="${value}" required></label>`;
-  const number = (name, label, value = '0', min = '0', max = '') =>
-    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="number" min="${min}" ${max ? `max="${max}"` : ''} value="${value}"></label>`;
+  const money = (name, label, { required = false, placeholder = '0,00' } = {}) =>
+    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="text" inputmode="decimal" value="" placeholder="${placeholder}" ${required ? 'required' : ''}></label>`;
+  const number = (name, label, { min = '0', max = '', required = false, placeholder = '' } = {}) =>
+    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="number" min="${min}" ${max ? `max="${max}"` : ''} value="" placeholder="${placeholder || min}" ${required ? 'required' : ''}></label>`;
 
   const forms = {
     salario_liquido: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '5.000,00')}
-        ${money('overtime', 'Horas extras (R$)', '350,00')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${money('overtime', 'Horas extras (R$)', { placeholder: '0,00' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <div>
           <span class="field-label">Dependentes</span>
           <div class="field flex items-center justify-between" style="padding-right:8px;padding-left:8px">
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Diminuir">−</button>
-            <input name="dependents" type="number" min="0" max="20" value="2" class="w-16 border-0 bg-transparent text-center text-lg font-semibold outline-none">
+            <input name="dependents" type="number" min="0" max="20" value="0" class="w-16 border-0 bg-transparent text-center text-lg font-semibold outline-none">
             <button type="button" class="stepper-btn" data-step="1" aria-label="Aumentar">+</button>
           </div>
         </div>
-        ${money('otherDeductions', 'Outros descontos (R$)', '100,00')}
+        ${money('otherDeductions', 'Outros descontos (R$)', { placeholder: '0,00' })}
       </div>`,
     fgts: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${number('months', 'Meses de depósito', '12', '1')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${number('months', 'Meses de depósito', { min: '1', required: true, placeholder: 'Ex: 12' })}
       </div>
       <label class="flex items-center gap-3 text-sm text-ink-soft">
         <input type="checkbox" name="includeFine" class="h-4 w-4 rounded border-line text-brand">
@@ -477,11 +477,11 @@ function formFields(id) {
       </label>`,
     ferias: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${money('avgOvertime', 'Média de horas extras (R$)', '0,00')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${money('avgOvertime', 'Média de horas extras (R$)', { placeholder: '0,00' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        ${number('days', 'Dias de férias', '30', '1', '30')}
+        ${number('days', 'Dias de férias', { min: '1', max: '30', required: true, placeholder: 'Ex: 30' })}
         <label class="flex items-end gap-3 pb-4 text-sm text-ink-soft">
           <input type="checkbox" name="sellOneThird" class="h-4 w-4 rounded border-line text-brand">
           Vender 1/3 (10 dias)
@@ -489,17 +489,17 @@ function formFields(id) {
       </div>`,
     decimo_terceiro: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${number('months', 'Meses trabalhados no ano', '12', '1', '12')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${number('months', 'Meses trabalhados no ano', { min: '1', max: '12', required: true, placeholder: 'Ex: 12' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        ${number('dependents', 'Dependentes', '0', '0', '20')}
-        ${money('paid', '1ª parcela já paga (R$)', '0,00')}
+        ${number('dependents', 'Dependentes', { min: '0', max: '20', placeholder: '0' })}
+        ${money('paid', '1ª parcela já paga (R$)', { placeholder: '0,00' })}
       </div>`,
     rescisao: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${number('dependents', 'Dependentes', '0', '0', '20')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${number('dependents', 'Dependentes', { min: '0', max: '20', placeholder: '0' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <label class="block min-w-0 flex-1"><span class="field-label">Data de admissão</span><input class="field" name="admission" type="date" required></label>
@@ -508,53 +508,55 @@ function formFields(id) {
       <div class="grid gap-6 sm:grid-cols-2">
         <label class="block min-w-0 flex-1"><span class="field-label">Tipo de demissão</span>
           <select class="field" name="dismissalType">
+            <option value="" disabled selected>Selecione</option>
             <option value="WITHOUT_JUST_CAUSE">Sem justa causa</option>
             <option value="AGREEMENT">Acordo</option>
             <option value="WITH_JUST_CAUSE">Com justa causa</option>
             <option value="RESIGNATION">Pedido de demissão</option>
           </select>
         </label>
-        ${number('vacationDays', 'Saldo de férias (dias)', '0', '0', '60')}
+        ${number('vacationDays', 'Saldo de férias (dias)', { min: '0', max: '60', placeholder: '0' })}
       </div>
       <div class="flex flex-col gap-3 text-sm text-ink-soft">
         <label class="flex items-center gap-3"><input type="checkbox" name="workedNotice" class="h-4 w-4 rounded border-line"> Aviso prévio trabalhado</label>
-        <label class="flex items-center gap-3"><input type="checkbox" name="includeFgts" class="h-4 w-4 rounded border-line" checked> Incluir saque FGTS estimado</label>
+        <label class="flex items-center gap-3"><input type="checkbox" name="includeFgts" class="h-4 w-4 rounded border-line"> Incluir saque FGTS estimado</label>
       </div>`,
     hora_extra: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${number('hours', 'Horas extras', '10', '0')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${number('hours', 'Horas extras', { min: '0', required: true, placeholder: 'Ex: 10' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <label class="block min-w-0 flex-1"><span class="field-label">Tipo</span>
-          <select class="field" name="overtimeType">
+          <select class="field" name="overtimeType" required>
+            <option value="" disabled selected>Selecione</option>
             <option value="WEEKDAY">50% (dias úteis)</option>
             <option value="SUNDAY_HOLIDAY">100% (domingo/feriado)</option>
           </select>
         </label>
-        ${number('nightHours', 'Horas com adicional noturno', '0', '0')}
+        ${number('nightHours', 'Horas com adicional noturno', { min: '0', placeholder: '0' })}
       </div>`,
     adicional_noturno: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Salário bruto (R$)', '3.000,00')}
-        ${number('nightHours', 'Horas noturnas', '22', '0')}
+        ${money('gross', 'Salário bruto (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}
+        ${number('nightHours', 'Horas noturnas', { min: '0', required: true, placeholder: 'Ex: 22' })}
       </div>`,
     seguro_desemprego: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('avgSalary', 'Salário médio (R$)', '2.500,00')}
-        ${number('months', 'Meses trabalhados (últimos 36)', '18', '0', '36')}
+        ${money('avgSalary', 'Salário médio (R$)', { required: true, placeholder: 'Ex: 2.500,00' })}
+        ${number('months', 'Meses trabalhados (últimos 36)', { min: '0', max: '36', required: true, placeholder: 'Ex: 18' })}
       </div>
-      ${number('previous', 'Solicitações anteriores', '0', '0', '5')}`,
+      ${number('previous', 'Solicitações anteriores', { min: '0', max: '5', placeholder: '0' })}`,
     inss: `
-      ${money('gross', 'Salário de contribuição (R$)', '3.000,00')}`,
+      ${money('gross', 'Salário de contribuição (R$)', { required: true, placeholder: 'Ex: 3.000,00' })}`,
     irrf: `
       <div class="grid gap-6 sm:grid-cols-2">
-        ${money('gross', 'Rendimento bruto (R$)', '5.000,00')}
-        ${money('inss', 'INSS já descontado (R$)', '0,00')}
+        ${money('gross', 'Rendimento bruto (R$)', { required: true, placeholder: 'Ex: 5.000,00' })}
+        ${money('inss', 'INSS já descontado (R$)', { placeholder: '0,00' })}
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
-        ${number('dependents', 'Dependentes', '0', '0', '20')}
-        ${money('otherDed', 'Outras deduções (R$)', '0,00')}
+        ${number('dependents', 'Dependentes', { min: '0', max: '20', placeholder: '0' })}
+        ${money('otherDed', 'Outras deduções (R$)', { placeholder: '0,00' })}
       </div>`,
   };
   return forms[id] || '';

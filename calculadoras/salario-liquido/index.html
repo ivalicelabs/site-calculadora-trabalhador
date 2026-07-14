@@ -104,19 +104,19 @@
         <form id="calc-form" data-calc-id="salario_liquido" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
       <div class="grid gap-6 sm:grid-cols-2">
-        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field" name="gross" type="text" inputmode="decimal" value="5.000,00" required></label>
-        <label class="block min-w-0 flex-1"><span class="field-label">Horas extras (R$)</span><input class="field" name="overtime" type="text" inputmode="decimal" value="350,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field" name="gross" type="text" inputmode="decimal" value="" placeholder="Ex: 3.000,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Horas extras (R$)</span><input class="field" name="overtime" type="text" inputmode="decimal" value="" placeholder="0,00" ></label>
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <div>
           <span class="field-label">Dependentes</span>
           <div class="field flex items-center justify-between" style="padding-right:8px;padding-left:8px">
             <button type="button" class="stepper-btn" data-step="-1" aria-label="Diminuir">−</button>
-            <input name="dependents" type="number" min="0" max="20" value="2" class="w-16 border-0 bg-transparent text-center text-lg font-semibold outline-none">
+            <input name="dependents" type="number" min="0" max="20" value="0" class="w-16 border-0 bg-transparent text-center text-lg font-semibold outline-none">
             <button type="button" class="stepper-btn" data-step="1" aria-label="Aumentar">+</button>
           </div>
         </div>
-        <label class="block min-w-0 flex-1"><span class="field-label">Outros descontos (R$)</span><input class="field" name="otherDeductions" type="text" inputmode="decimal" value="100,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Outros descontos (R$)</span><input class="field" name="otherDeductions" type="text" inputmode="decimal" value="" placeholder="0,00" ></label>
       </div>
           <button type="submit" class="btn-primary">Calcular</button>
         </form>

@@ -104,10 +104,10 @@
         <form id="calc-form" data-calc-id="seguro_desemprego" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
       <div class="grid gap-6 sm:grid-cols-2">
-        <label class="block min-w-0 flex-1"><span class="field-label">Salário médio (R$)</span><input class="field" name="avgSalary" type="text" inputmode="decimal" value="2.500,00" required></label>
-        <label class="block min-w-0 flex-1"><span class="field-label">Meses trabalhados (últimos 36)</span><input class="field" name="months" type="number" min="0" max="36" value="18"></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Salário médio (R$)</span><input class="field" name="avgSalary" type="text" inputmode="decimal" value="" placeholder="Ex: 2.500,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Meses trabalhados (últimos 36)</span><input class="field" name="months" type="number" min="0" max="36" value="" placeholder="Ex: 18" required></label>
       </div>
-      <label class="block min-w-0 flex-1"><span class="field-label">Solicitações anteriores</span><input class="field" name="previous" type="number" min="0" max="5" value="0"></label>
+      <label class="block min-w-0 flex-1"><span class="field-label">Solicitações anteriores</span><input class="field" name="previous" type="number" min="0" max="5" value="" placeholder="0" ></label>
           <button type="submit" class="btn-primary">Calcular</button>
         </form>
 
