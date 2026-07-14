@@ -628,38 +628,108 @@ function legalPage(kind) {
   const title = isPrivacy ? 'Política de Privacidade' : 'Termos de Uso';
   const canonical = isPrivacy ? '/privacidade/' : '/termos/';
   const body = isPrivacy
-    ? `<p>A ${SITE.org} (“nós”) opera o site ${SITE.url} e o aplicativo Calculadora do Trabalhador Brasileiro. Esta Política descreve como tratamos dados quando você usa nossos serviços.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">1. Dados que coletamos</h2>
-      <p class="mt-3">No site, os cálculos são feitos no seu navegador. Não enviamos salário, dependentes ou outros valores informados para nossos servidores. Podemos coletar dados técnicos anônimos (como páginas visitadas) via provedores de hospedagem ou analytics, se habilitados.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">2. Uso dos dados</h2>
-      <p class="mt-3">Usamos informações apenas para operar, melhorar e proteger o serviço, responder contatos enviados a ${SITE.email} e cumprir obrigações legais.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">3. Cookies e anúncios</h2>
-      <p class="mt-3">Podemos usar cookies essenciais. Espaços publicitários (ex.: Google AdSense) podem ser ativados no futuro; nesse caso, parceiros poderão usar cookies conforme suas próprias políticas.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">4. Compartilhamento</h2>
-      <p class="mt-3">Não vendemos dados pessoais. Podemos compartilhar com prestadores essenciais (hospedagem) ou quando exigido por lei.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">5. Seus direitos</h2>
-      <p class="mt-3">Você pode solicitar informações ou exclusão de dados de contato pelo e-mail ${SITE.email}, nos termos da LGPD.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">6. Contato</h2>
+    ? `<p>A <strong>${SITE.org}</strong> (“nós”, “nosso”) opera o site <a class="text-brand underline" href="${SITE.url}">${SITE.url}</a> e o aplicativo móvel <strong>Calculadora do Trabalhador Brasileiro</strong> (Android, pacote <code>br.com.calctrabalhador</code>). Esta Política de Privacidade explica como tratamos dados pessoais no site e no aplicativo, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+      <p class="mt-3">Contato do controlador: <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">1. Escopo</h2>
+      <p class="mt-3">Esta política aplica-se ao uso do site institucional do produto e do aplicativo Android disponibilizado na Google Play. O site institucional da ${SITE.org} (<a class="text-brand underline" href="https://ivalice.com.br">ivalice.com.br</a>) pode ter política própria.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">2. Dados que tratamos</h2>
+      <p class="mt-3"><strong>Cálculos trabalhistas.</strong> Os valores que você informa (salário, dependentes, datas etc.) são processados localmente: no navegador (site) ou no dispositivo (aplicativo). <strong>Não enviamos esses dados de cálculo para nossos servidores.</strong> No aplicativo, histórico e favoritos podem ser armazenados apenas no próprio aparelho (banco local).</p>
+      <p class="mt-3"><strong>Contato.</strong> Se você nos escrever por e-mail, trataremos nome, e-mail e o conteúdo da mensagem para responder.</p>
+      <p class="mt-3"><strong>Dados técnicos.</strong> Podemos receber, por meio de hospedagem ou parceiros, dados como endereço IP, tipo de dispositivo/navegador, páginas ou telas acessadas, data/hora e identificadores técnicos necessários à segurança e ao funcionamento.</p>
+      <p class="mt-3"><strong>Publicidade.</strong> Quando anúncios estiverem ativos, parceiros de publicidade podem tratar identificadores de publicidade, cookies, identificadores de dispositivo e dados de uso para exibir, medir e personalizar anúncios (detalhes na seção 4).</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">3. Finalidades e bases legais</h2>
+      <ul class="mt-3 list-disc space-y-2 pl-5">
+        <li>Prestar o serviço de calculadoras e manter o app/site funcionando (execução de contrato / legítimo interesse);</li>
+        <li>Responder contatos e suporte (procedimento preliminar a pedido do titular / legítimo interesse);</li>
+        <li>Segurança, prevenção a abuso e melhoria do produto (legítimo interesse);</li>
+        <li>Cumprimento de obrigações legais;</li>
+        <li>Exibição de publicidade, inclusive personalizada quando permitido, com base em legítimo interesse e/ou consentimento, conforme a legislação e as opções apresentadas a você (ex.: formulário de consentimento de anúncios no app ou configurações de cookies no site).</li>
+      </ul>
+
+      <h2 class="mt-8 font-display text-xl font-bold">4. Publicidade — Google AdSense (site) e Google AdMob (aplicativo)</h2>
+      <p class="mt-3">Podemos exibir anúncios para manter o produto gratuito:</p>
+      <ul class="mt-3 list-disc space-y-2 pl-5">
+        <li><strong>Site:</strong> Google AdSense e tecnologias semelhantes. Podem ser usados cookies e tecnologias de rastreamento de terceiros para veicular anúncios, limitar frequência, medir desempenho e, quando autorizado, personalizar conteúdo publicitário.</li>
+        <li><strong>Aplicativo:</strong> Google AdMob (e SDKs relacionados da Google). Podem ser usados o Identificador de Publicidade do Android (GAID), dados de uso do app e identificadores técnicos para exibir anúncios (incluindo intersticiais/recompensados, quando habilitados).</li>
+      </ul>
+      <p class="mt-3">A Google e demais redes/parceiros de anúncios podem tratar dados como operadores/controladores independentes, segundo suas próprias políticas. Consulte também:</p>
+      <ul class="mt-3 list-disc space-y-2 pl-5">
+        <li><a class="text-brand underline" href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Política de Privacidade da Google</a></li>
+        <li><a class="text-brand underline" href="https://policies.google.com/technologies/ads" rel="noopener noreferrer" target="_blank">Como a Google usa dados de anúncios</a></li>
+        <li><a class="text-brand underline" href="https://support.google.com/adsense/answer/7549925" rel="noopener noreferrer" target="_blank">Informações sobre AdSense / cookies de anúncios</a></li>
+      </ul>
+      <p class="mt-3">Você pode gerenciar preferências de anúncios personalizados nas configurações da conta Google / dispositivo e, no app, por meio de eventuais telas de consentimento (UMP) quando forem exibidas. A desativação de cookies ou do identificador de publicidade pode reduzir a personalização, mas anúncios genéricos ainda podem aparecer.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">5. Cookies e armazenamento local (site)</h2>
+      <p class="mt-3">Utilizamos armazenamento local do navegador para preferências e, opcionalmente, histórico de cálculos salvos no próprio aparelho. Cookies essenciais e de terceiros (CDN, fontes, AdSense) podem ser carregados. Você pode limpar ou bloquear cookies nas configurações do navegador.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">6. Compartilhamento</h2>
+      <p class="mt-3">Não vendemos dados pessoais. Podemos compartilhar dados com: (a) prestadores de infraestrutura (ex.: hospedagem GitHub Pages); (b) Google e parceiros de publicidade, conforme a seção 4; (c) autoridades, quando houver obrigação legal.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">7. Transferências internacionais</h2>
+      <p class="mt-3">Como utilizamos serviços da Google e hospedagem que podem operar fora do Brasil, dados técnicos e de publicidade podem ser transferidos internacionalmente, com salvaguardas previstas na LGPD e nas políticas dos fornecedores.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">8. Retenção</h2>
+      <p class="mt-3">Dados de cálculo permanecem no seu dispositivo até você apagá-los (ou desinstalar o app / limpar o navegador). Mensagens de contato são retidas pelo tempo necessário ao atendimento e às obrigações legais. Dados de publicidade seguem as políticas e prazos dos parceiros.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">9. Segurança</h2>
+      <p class="mt-3">Adotamos medidas razoáveis de segurança. Nenhum sistema é isento de risco. Em incidente relevante, procederemos conforme a legislação aplicável.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">10. Crianças e adolescentes</h2>
+      <p class="mt-3">O serviço não é direcionado a crianças menores de 13 anos. Não coletamos intencionalmente dados de crianças. Se souber de coleta indevida, contate-nos para remoção quando aplicável.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">11. Seus direitos (LGPD)</h2>
+      <p class="mt-3">Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, bloqueio ou eliminação, portabilidade quando cabível, informação sobre compartilhamentos, revogação de consentimento e oposição ao legítimo interesse, nos termos da lei. Escreva para <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a> com o assunto “LGPD”. Você também pode reclamar à ANPD.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">12. Alterações</h2>
+      <p class="mt-3">Podemos atualizar esta política. A versão vigente estará sempre nesta página, com a data de atualização abaixo.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">13. Contato</h2>
       <p class="mt-3">${SITE.org} — <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
-      <p class="mt-6 text-sm text-ink-muted">Última atualização: julho de 2026.</p>`
-    : `<p>Ao usar ${SITE.url}, você concorda com estes Termos de Uso.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">1. Serviço</h2>
-      <p class="mt-3">Oferecemos calculadoras trabalhistas educativas e estimativas. Os resultados são aproximados e não substituem orientação de contador, advogado ou órgãos oficiais.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">2. Uso permitido</h2>
-      <p class="mt-3">Você pode usar o site para fins pessoais e informativos. É proibido abusar da infraestrutura, tentar burlar proteções ou usar o conteúdo de forma ilegal.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">3. Isenção de responsabilidade</h2>
-      <p class="mt-3">Tabelas e alíquotas podem mudar. Não nos responsabilizamos por decisões tomadas apenas com base nas estimativas do site ou do aplicativo.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">4. Propriedade intelectual</h2>
-      <p class="mt-3">Marca, layout e textos do site pertencem à ${SITE.org}, salvo indicação em contrário.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">5. Alterações</h2>
-      <p class="mt-3">Podemos atualizar estes termos. A versão vigente estará sempre publicada nesta página.</p>
-      <h2 class="mt-8 font-display text-xl font-bold">6. Contato</h2>
+      <p class="mt-6 text-sm text-ink-muted">Última atualização: 14 de julho de 2026.</p>`
+    : `<p>Ao acessar o site <a class="text-brand underline" href="${SITE.url}">${SITE.url}</a> ou o aplicativo <strong>Calculadora do Trabalhador Brasileiro</strong> (Android), você concorda com estes Termos de Uso. Se não concordar, não utilize os serviços.</p>
+      <p class="mt-3">Os serviços são oferecidos pela <strong>${SITE.org}</strong> (<a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a>).</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">1. Descrição do serviço</h2>
+      <p class="mt-3">Disponibilizamos calculadoras e conteúdos informativos relacionados a direitos e obrigações trabalhistas no Brasil (CLT e tabelas de referência). Os resultados são <strong>estimativas educativas</strong> e <strong>não substituem</strong> parecer de contador, advogado, sindicato ou orientação oficial de órgãos públicos.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">2. Conta e idade</h2>
+      <p class="mt-3">Não é obrigatório criar conta. O serviço não é destinado a menores de 13 anos.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">3. Uso permitido</h2>
+      <p class="mt-3">Você pode usar o site e o app para fins pessoais e informativos. É proibido: abusar da infraestrutura; tentar comprometer a segurança; fazer engenharia reversa indevida; usar os serviços de forma ilícita; ou republicar conteúdo de forma que sugira endosso oficial do governo ou da ${SITE.org} sem autorização.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">4. Publicidade</h2>
+      <p class="mt-3">Os serviços podem exibir anúncios por meio do <strong>Google AdSense</strong> (site) e do <strong>Google AdMob</strong> (aplicativo), inclusive anúncios personalizados quando permitido. A presença de publicidade faz parte do modelo gratuito do produto. O uso de dados para anúncios está descrito na <a class="text-brand underline" href="/privacidade/">Política de Privacidade</a>.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">5. Isenção de responsabilidade</h2>
+      <p class="mt-3">Tabelas, alíquotas e regras legais mudam com frequência. Não garantimos adequação a um caso concreto, ausência de erros ou atualização permanente de todas as normas. Você é responsável por validar resultados antes de qualquer decisão financeira, trabalhista ou fiscal. Na máxima extensão permitida pela lei, a ${SITE.org} não responde por danos decorrentes do uso das estimativas.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">6. Propriedade intelectual</h2>
+      <p class="mt-3">Marca, layout, textos e código do produto pertencem à ${SITE.org} ou a licenciadores, salvo indicação em contrário. O uso do serviço não transfere direitos de propriedade intelectual.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">7. Disponibilidade</h2>
+      <p class="mt-3">Podemos alterar, suspender ou descontinuar funcionalidades, anúncios ou o próprio serviço, com ou sem aviso prévio, na medida permitida.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">8. Privacidade</h2>
+      <p class="mt-3">O tratamento de dados pessoais regese pela <a class="text-brand underline" href="/privacidade/">Política de Privacidade</a>.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">9. Alterações destes termos</h2>
+      <p class="mt-3">Podemos atualizar estes Termos. A versão vigente estará nesta página. O uso continuado após a publicação constitui aceitação das alterações, quando a lei assim permitir.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">10. Lei aplicável</h2>
+      <p class="mt-3"> Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca do domicílio do usuário consumidor, sem prejuízo de outros direitos legais.</p>
+
+      <h2 class="mt-8 font-display text-xl font-bold">11. Contato</h2>
       <p class="mt-3"><a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
-      <p class="mt-6 text-sm text-ink-muted">Última atualização: julho de 2026.</p>`;
+      <p class="mt-6 text-sm text-ink-muted">Última atualização: 14 de julho de 2026.</p>`;
 
   return `${head({
     title,
-    description: `${title} da ${SITE.name}.`,
+    description: `${title} da ${SITE.name} — site e aplicativo Android.`,
     canonical,
     active: '',
   })}
