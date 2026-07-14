@@ -28,7 +28,13 @@ export function maskCurrencyDigits(raw) {
 }
 
 export function parseBRLInput(raw) {
-  const cleaned = String(raw ?? '')
+  const s = String(raw ?? '').trim();
+  if (!s) return 0;
+  // Digitos crus = entrada por centavos (ex.: "4000" → R$ 40,00)
+  if (/^\d+$/.test(s)) {
+    return Number.parseInt(s, 10);
+  }
+  const cleaned = s
     .replace(/[^\d,.-]/g)
     .replace(/\./g, '')
     .replace(',', '.');

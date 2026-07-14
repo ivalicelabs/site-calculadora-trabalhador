@@ -246,9 +246,22 @@ if (form) {
   const breakdownEl = document.querySelector('[data-breakdown]');
   initSteppers(form);
   bindCurrencyMasks(form);
+  if (window.CltCurrencyMask) window.CltCurrencyMask.bindAll(form);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    form.querySelectorAll('input[data-currency]').forEach((input) => {
+      if (window.CltCurrencyMask) window.CltCurrencyMask.applyMask(input);
+      else if (input.value) {
+        const digits = input.value.replace(/\D/g, '');
+        input.value = digits
+          ? (Number(digits) / 100).toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          : '';
+      }
+    });
     try {
       const { primary, valueKey, rows } = runCalculator(id, form);
       if (!primary.eligible && id === 'seguro_desemprego') {

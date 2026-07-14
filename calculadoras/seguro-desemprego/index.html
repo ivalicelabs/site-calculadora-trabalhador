@@ -104,7 +104,7 @@
         <form id="calc-form" data-calc-id="seguro_desemprego" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
       <div class="grid gap-6 sm:grid-cols-2">
-        <label class="block min-w-0 flex-1"><span class="field-label">Salário médio (R$)</span><input class="field" name="avgSalary" type="text" inputmode="numeric" data-currency value="" placeholder="Ex: 2.500,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Salário médio (R$)</span><input class="field js-currency" name="avgSalary" type="text" inputmode="numeric" data-currency autocomplete="off" value="" placeholder="Ex: 2.500,00" required></label>
         <label class="block min-w-0 flex-1"><span class="field-label">Meses trabalhados (últimos 36)</span><input class="field" name="months" type="number" min="0" max="36" value="" placeholder="Ex: 18" required></label>
       </div>
       <label class="block min-w-0 flex-1"><span class="field-label">Solicitações anteriores</span><input class="field" name="previous" type="number" min="0" max="5" value="" placeholder="0" ></label>
@@ -176,7 +176,8 @@
       </div>
     </footer>
   </div>
-<script type="module" src="/assets/js/main.js"></script>
+<script src="/assets/js/currency-mask.js" defer></script>
+  <script type="module" src="/assets/js/main.js"></script>
   <script type="module" src="/assets/js/calc-page.js"></script>
 </body>
 </html>

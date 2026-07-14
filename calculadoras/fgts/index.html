@@ -104,7 +104,7 @@
         <form id="calc-form" data-calc-id="fgts" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
       <div class="grid gap-6 sm:grid-cols-2">
-        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field" name="gross" type="text" inputmode="numeric" data-currency value="" placeholder="Ex: 3.000,00" required></label>
+        <label class="block min-w-0 flex-1"><span class="field-label">Salário bruto (R$)</span><input class="field js-currency" name="gross" type="text" inputmode="numeric" data-currency autocomplete="off" value="" placeholder="Ex: 3.000,00" required></label>
         <label class="block min-w-0 flex-1"><span class="field-label">Meses de depósito</span><input class="field" name="months" type="number" min="1"  value="" placeholder="Ex: 12" required></label>
       </div>
       <label class="flex items-center gap-3 text-sm text-ink-soft">
@@ -179,7 +179,8 @@
       </div>
     </footer>
   </div>
-<script type="module" src="/assets/js/main.js"></script>
+<script src="/assets/js/currency-mask.js" defer></script>
+  <script type="module" src="/assets/js/main.js"></script>
   <script type="module" src="/assets/js/calc-page.js"></script>
 </body>
 </html>

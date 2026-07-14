@@ -326,7 +326,8 @@ function footer(variant = 'home') {
 }
 
 function scripts(extra = '') {
-  return `<script type="module" src="/assets/js/main.js"></script>${extra}
+  return `<script src="/assets/js/currency-mask.js" defer></script>
+  <script type="module" src="/assets/js/main.js"></script>${extra}
 </body>
 </html>`;
 }
@@ -432,7 +433,7 @@ ${scripts()}`;
 
 function formFields(id) {
   const money = (name, label, { required = false, placeholder = '0,00' } = {}) =>
-    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="text" inputmode="numeric" data-currency value="" placeholder="${placeholder}" ${required ? 'required' : ''}></label>`;
+    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field js-currency" name="${name}" type="text" inputmode="numeric" data-currency autocomplete="off" value="" placeholder="${placeholder}" ${required ? 'required' : ''}></label>`;
   const number = (name, label, { min = '0', max = '', required = false, placeholder = '' } = {}) =>
     `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="number" min="${min}" ${max ? `max="${max}"` : ''} value="" placeholder="${placeholder || min}" ${required ? 'required' : ''}></label>`;
 

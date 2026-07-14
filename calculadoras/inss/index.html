@@ -103,7 +103,7 @@
 
         <form id="calc-form" data-calc-id="inss" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           
-      <label class="block min-w-0 flex-1"><span class="field-label">Salário de contribuição (R$)</span><input class="field" name="gross" type="text" inputmode="numeric" data-currency value="" placeholder="Ex: 3.000,00" required></label>
+      <label class="block min-w-0 flex-1"><span class="field-label">Salário de contribuição (R$)</span><input class="field js-currency" name="gross" type="text" inputmode="numeric" data-currency autocomplete="off" value="" placeholder="Ex: 3.000,00" required></label>
           <button type="submit" class="btn-primary">Calcular</button>
         </form>
 
@@ -172,7 +172,8 @@
       </div>
     </footer>
   </div>
-<script type="module" src="/assets/js/main.js"></script>
+<script src="/assets/js/currency-mask.js" defer></script>
+  <script type="module" src="/assets/js/main.js"></script>
   <script type="module" src="/assets/js/calc-page.js"></script>
 </body>
 </html>
