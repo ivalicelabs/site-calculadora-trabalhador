@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de INSS | Calculadora do Trabalhador Brasileiro</title>
+  <meta name="description" content="Tabela atualizada de contribuição previdenciária.">
+  <meta name="keywords" content="calculadora INSS">
+  <meta name="theme-color" content="#1b5e3b">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://clt.ivalice.com.br/calculadoras/inss/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Calculadora de INSS | Calculadora do Trabalhador Brasileiro">
+  <meta property="og:description" content="Tabela atualizada de contribuição previdenciária.">
+  <meta property="og:url" content="https://clt.ivalice.com.br/calculadoras/inss/">
+  <meta property="og:site_name" content="Calculadora do Trabalhador Brasileiro">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
+            page: '#f9fafb',
+            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
+            line: '#e5e7eb',
+            danger: '#dc2626',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+          },
+          maxWidth: { site: '1440px', calc: '800px' },
+          boxShadow: {
+            card: '0 4px 12px rgba(0,0,0,0.03)',
+            hero: '0 8px 16px rgba(0,0,0,0.03)',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Calculadora do Trabalhador Brasileiro","url":"https://clt.ivalice.com.br","publisher":{"@type":"Organization","name":"Ivalice Labs","email":"contato@ivalice.com.br"},"potentialAction":{"@type":"SearchAction","target":"https://clt.ivalice.com.br/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+</head>
+<body class="min-h-screen bg-page text-ink antialiased" data-active="calcs">
+  <div class="flex min-h-screen flex-col">
+    <header class="sticky top-0 z-50 border-b border-line bg-white">
+    <div class="mx-auto flex h-16 max-w-site items-center justify-between gap-4 px-4 sm:h-20 sm:px-8 lg:px-12">
+      <a href="/" class="flex items-center gap-3 shrink-0">
+    <img src="/assets/img/logo.svg" alt="" width="38" height="40" class="h-10 w-[38px]">
+    <span class="leading-tight">
+      <span class="block font-display text-[15px] font-extrabold tracking-wide text-brand sm:text-[18px]">CALCULADORA DO TRABALHADOR</span>
+      <span class="block text-[10px] font-semibold uppercase tracking-wide text-ink-muted sm:text-[11px]">Brasileiro</span>
+    </span>
+  </a>
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
+        <a href="/" class="relative font-display text-[15px] font-medium text-ink-muted hover:text-brand">Início</a>
+        <a href="/#calculadoras" class="relative font-display text-[15px] nav-active font-semibold text-brand">Calculadoras</a>
+      </nav>
+      <div class="hidden items-center gap-4 lg:flex">
+        <label class="relative flex h-12 w-80 items-center gap-3 rounded-xl border border-line bg-white px-4">
+          <svg class="h-5 w-5 shrink-0 text-ink-faint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+          <input type="search" data-header-search placeholder="Busque por uma calculadora..." class="w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-faint">
+        </label>
+      </div>
+      <button type="button" data-mobile-toggle class="rounded-lg p-2 text-ink md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="mobile-nav border-t border-line px-4 md:hidden">
+      <nav class="flex flex-col gap-1 py-4 text-[15px]">
+        <a href="/" class="rounded-lg px-3 py-2.5 font-semibold text-brand">Início</a>
+        <a href="/#calculadoras" class="rounded-lg px-3 py-2.5 text-ink-muted">Calculadoras</a>
+        <a href="/sobre/" class="rounded-lg px-3 py-2.5 text-ink-muted">Sobre</a>
+        <a href="/contato/" class="rounded-lg px-3 py-2.5 text-ink-muted">Contato</a>
+        <a href="/privacidade/" class="rounded-lg px-3 py-2.5 text-ink-muted">Privacidade</a>
+        <a href="/termos/" class="rounded-lg px-3 py-2.5 text-ink-muted">Termos</a>
+      </nav>
+    </div>
+  </header>
+    <main class="flex-1 px-4 py-10 sm:px-8 sm:py-12">
+      <div class="mx-auto w-full max-w-calc space-y-8">
+        <nav class="flex flex-wrap items-center gap-2 text-sm text-ink-soft" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-brand">Início</a>
+          <span class="text-ink-faint">&gt;</span>
+          <a href="/#calculadoras" class="hover:text-brand">Calculadoras</a>
+          <span class="text-ink-faint">&gt;</span>
+          <span class="font-semibold text-brand-deep">INSS</span>
+        </nav>
+
+        <div>
+          <h1 class="font-display text-3xl font-bold text-ink sm:text-[32px]">INSS</h1>
+          <p class="mt-2 text-lg text-ink-soft">Informe os dados para o cálculo</p>
+        </div>
+
+        <div class="ad-slot" data-ads="off" data-ad-slot="calc-top"></div>
+
+        <form id="calc-form" data-calc-id="inss" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
+          
+      <label class="block min-w-0 flex-1"><span class="field-label">Salário de contribuição (R$)</span><input class="field" name="gross" type="text" inputmode="decimal" value="3.000,00" required></label>
+          <button type="submit" class="btn-primary">Calcular</button>
+        </form>
+
+        <section id="results" class="result-panel space-y-8" hidden>
+          <div class="rounded-3xl bg-brand-deep px-6 py-8 text-center text-white">
+            <p class="text-base font-medium opacity-80" data-result-label>Contribuição INSS</p>
+            <p class="mt-2 font-display text-4xl font-bold sm:text-[40px]" data-result-value>—</p>
+          </div>
+          <div>
+            <h2 class="font-display text-xl font-semibold text-ink">Detalhamento</h2>
+            <div class="mt-2 divide-y divide-line" data-breakdown></div>
+            <p class="mt-4 text-sm italic text-ink-faint">* Valores aproximados com tabelas de referência 2026. Confira a legislação vigente.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <button type="button" data-share class="btn-secondary">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M8 7l4-4 4 4"/></svg>
+              Compartilhar
+            </button>
+            <button type="button" data-save class="btn-primary h-14 text-base">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+              Salvar
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="mt-auto border-t border-line bg-white px-6 pb-10 pt-16 sm:px-12 lg:px-20">
+      <div class="mx-auto flex max-w-site flex-col gap-12">
+        <div class="flex flex-col justify-between gap-10 lg:flex-row">
+          <div class="max-w-md space-y-4">
+            <a href="/" class="flex items-center gap-3 shrink-0">
+    <img src="/assets/img/logo.svg" alt="" width="38" height="40" class="h-10 w-[38px]">
+    <span class="leading-tight">
+      <span class="block font-display text-[15px] font-extrabold tracking-wide text-brand sm:text-[18px]">CALCULADORA DO TRABALHADOR</span>
+      <span class="block text-[10px] font-semibold uppercase tracking-wide text-ink-muted sm:text-[11px]">Brasileiro</span>
+    </span>
+  </a>
+            <p class="text-sm leading-relaxed text-ink-soft">Ferramentas gratuitas para auxiliar o trabalhador brasileiro no cálculo de seus direitos e obrigações trabalhistas.</p>
+          </div>
+          <div class="flex flex-wrap gap-12 sm:gap-16">
+            <div class="space-y-4 text-sm">
+              <p class="font-bold text-ink">Calculadoras</p>
+              <div class="flex flex-col gap-3"><a href="/calculadoras/salario-liquido/" class="text-ink-soft hover:text-brand">Salário Líquido</a>
+              <a href="/calculadoras/fgts/" class="text-ink-soft hover:text-brand">FGTS</a>
+              <a href="/calculadoras/ferias/" class="text-ink-soft hover:text-brand">Férias</a>
+              <a href="/calculadoras/decimo-terceiro/" class="text-ink-soft hover:text-brand">13° Salário</a>
+              <a href="/calculadoras/rescisao/" class="text-ink-soft hover:text-brand">Rescisão</a>
+              <a href="/calculadoras/hora-extra/" class="text-ink-soft hover:text-brand">Hora Extra</a>
+              <a href="/calculadoras/adicional-noturno/" class="text-ink-soft hover:text-brand">Adicional Noturno</a>
+              <a href="/calculadoras/inss/" class="text-ink-soft hover:text-brand">INSS</a>
+              <a href="/calculadoras/seguro-desemprego/" class="text-ink-soft hover:text-brand">Seguro Desemprego</a>
+              <a href="/calculadoras/irrf/" class="text-ink-soft hover:text-brand">IRRF</a></div>
+            </div>
+            <div class="space-y-4 text-sm">
+              <p class="font-bold text-ink">Empresa</p>
+              <a href="/sobre/" class="block text-ink-soft hover:text-brand">Sobre nós</a>
+              <a href="/termos/" class="block text-ink-soft hover:text-brand">Termos de Uso</a>
+              <a href="/privacidade/" class="block text-ink-soft hover:text-brand">Privacidade</a>
+              <a href="/contato/" class="block text-ink-soft hover:text-brand">Contato</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-between gap-4 border-t border-line pt-6 text-sm text-ink-faint sm:flex-row sm:items-center">
+          <p>© 2026 Calculadora do Trabalhador Brasileiro. Todos os direitos reservados.</p>
+          <div class="flex gap-6 text-ink-muted">
+            <a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank" aria-label="Instagram" class="hover:text-brand">IG</a>
+            <a href="https://x.com/" rel="noopener noreferrer" target="_blank" aria-label="X" class="hover:text-brand">X</a>
+            <a href="https://www.linkedin.com/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn" class="hover:text-brand">in</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+<script type="module" src="/assets/js/main.js"></script>
+  <script type="module" src="/assets/js/calc-page.js"></script>
+</body>
+</html>
