@@ -155,7 +155,7 @@ function head({ title, description, keywords = '', canonical, active = '' }) {
   <meta property="og:url" content="${SITE.url}${canonical}">
   <meta property="og:site_name" content="${esc(SITE.name)}">
   <meta name="twitter:card" content="summary">
-  <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -211,7 +211,7 @@ function esc(s) {
 
 function logoBlock() {
   return `<a href="/" class="flex items-center gap-3 shrink-0">
-    <img src="/assets/img/logo.svg" alt="" width="38" height="40" class="h-10 w-[38px]">
+    <img src="/assets/img/logo.png" alt="" width="38" height="40" class="h-10 w-[38px] object-contain">
     <span class="leading-tight">
       <span class="block font-display text-[15px] font-extrabold tracking-wide text-brand sm:text-[18px]">CALCULADORA DO TRABALHADOR</span>
       <span class="block text-[10px] font-semibold uppercase tracking-wide text-ink-muted sm:text-[11px]">Brasileiro</span>
