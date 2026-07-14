@@ -12,6 +12,7 @@ import {
   formatBRL,
   parseBRLInput,
 } from './calculators.js';
+import { bindCurrencyMasks } from './money.js';
 import { getCalculator } from './site.js';
 
 function money(form, name) {
@@ -244,6 +245,7 @@ if (form) {
   const valueEl = document.querySelector('[data-result-value]');
   const breakdownEl = document.querySelector('[data-breakdown]');
   initSteppers(form);
+  bindCurrencyMasks(form);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();

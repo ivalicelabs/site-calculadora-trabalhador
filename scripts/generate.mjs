@@ -283,11 +283,6 @@ function footer(variant = 'home') {
         </div>
         <div class="flex flex-col justify-between gap-4 border-t border-line pt-6 text-sm text-ink-faint sm:flex-row sm:items-center">
           <p>© ${new Date().getFullYear()} ${esc(SITE.name)}. Todos os direitos reservados.</p>
-          <div class="flex gap-6 text-ink-muted">
-            <a href="https://www.instagram.com/" rel="noopener noreferrer" target="_blank" aria-label="Instagram" class="hover:text-brand">IG</a>
-            <a href="https://x.com/" rel="noopener noreferrer" target="_blank" aria-label="X" class="hover:text-brand">X</a>
-            <a href="https://www.linkedin.com/" rel="noopener noreferrer" target="_blank" aria-label="LinkedIn" class="hover:text-brand">in</a>
-          </div>
         </div>
       </div>
     </footer>`;
@@ -299,14 +294,6 @@ function footer(variant = 'home') {
         <div class="max-w-sm space-y-4">
           ${logoBlock()}
           <p class="text-sm leading-relaxed text-ink-soft">A ferramenta mais completa para o trabalhador brasileiro. Simples, rápido e 100% gratuito.</p>
-          <div class="flex gap-3 pt-2">
-            ${['IG', 'X', 'in', 'fb']
-              .map(
-                (l) =>
-                  `<span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-page text-xs font-semibold text-ink-muted">${l}</span>`,
-              )
-              .join('')}
-          </div>
         </div>
         <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-16">
           <div class="space-y-4 text-sm">
@@ -445,7 +432,7 @@ ${scripts()}`;
 
 function formFields(id) {
   const money = (name, label, { required = false, placeholder = '0,00' } = {}) =>
-    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="text" inputmode="decimal" value="" placeholder="${placeholder}" ${required ? 'required' : ''}></label>`;
+    `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="text" inputmode="numeric" data-currency value="" placeholder="${placeholder}" ${required ? 'required' : ''}></label>`;
   const number = (name, label, { min = '0', max = '', required = false, placeholder = '' } = {}) =>
     `<label class="block min-w-0 flex-1"><span class="field-label">${label}</span><input class="field" name="${name}" type="number" min="${min}" ${max ? `max="${max}"` : ''} value="" placeholder="${placeholder || min}" ${required ? 'required' : ''}></label>`;
 
