@@ -1,0 +1,28 @@
+# Calculadora do Trabalhador Brasileiro
+> Calculadoras CLT gratuitas com tabelas 2026: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego.
+
+Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas e não substituem holerite, TRCT ou orientação profissional.
+
+## Calculadoras
+- [Salário Líquido](https://clt.ivalice.com.br/calculadoras/salario-liquido/): Quanto sobra após todos os descontos em folha.
+- [FGTS](https://clt.ivalice.com.br/calculadoras/fgts/): Cálculo do Fundo de Garantia por Tempo de Serviço.
+- [Férias](https://clt.ivalice.com.br/calculadoras/ferias/): Provisão de férias com 1/3 constitucional.
+- [13° Salário](https://clt.ivalice.com.br/calculadoras/decimo-terceiro/): Estimativa das parcelas do décimo terceiro.
+- [Rescisão](https://clt.ivalice.com.br/calculadoras/rescisao/): Simulação completa do contrato de trabalho.
+- [Hora Extra](https://clt.ivalice.com.br/calculadoras/hora-extra/): Cálculo de 50%, 100% e adicionais.
+- [Adicional Noturno](https://clt.ivalice.com.br/calculadoras/adicional-noturno/): Adicional por trabalho entre 22h e 5h.
+- [INSS](https://clt.ivalice.com.br/calculadoras/inss/): Tabela atualizada de contribuição previdenciária.
+- [Seguro Desemprego](https://clt.ivalice.com.br/calculadoras/seguro-desemprego/): Cálculo de parcelas e elegibilidade.
+- [IRRF](https://clt.ivalice.com.br/calculadoras/irrf/): Imposto de Renda Retido na Fonte com dependentes.
+
+## Institucional
+- [Início](https://clt.ivalice.com.br/): lista de calculadoras
+- [Sobre](https://clt.ivalice.com.br/sobre/)
+- [Contato](https://clt.ivalice.com.br/contato/): contato@ivalice.com.br
+- [Privacidade](https://clt.ivalice.com.br/privacidade/)
+- [Termos](https://clt.ivalice.com.br/termos/)
+- [Ivalice Labs](https://ivalice.com.br/): empresa
+
+## Optional
+- [Sitemap](https://clt.ivalice.com.br/sitemap.xml)
+- [ads.txt](https://clt.ivalice.com.br/ads.txt)

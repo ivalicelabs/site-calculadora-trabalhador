@@ -1077,10 +1077,42 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: ${SITE.url}/sitemap.xml
 `,
 );
 write('CNAME', 'clt.ivalice.com.br\n');
+write('llms.txt', `# Calculadora do Trabalhador Brasileiro
+> Calculadoras CLT gratuitas com tabelas ${LEGISLATION_YEAR}: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego.
+
+Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas e não substituem holerite, TRCT ou orientação profissional.
+
+## Calculadoras
+${CALCULATORS.map((c) => `- [${c.title}](${SITE.url}/calculadoras/${c.slug}/): ${c.blurb}`).join('\n')}
+
+## Institucional
+- [Início](${SITE.url}/): lista de calculadoras
+- [Sobre](${SITE.url}/sobre/)
+- [Contato](${SITE.url}/contato/): ${SITE.email}
+- [Privacidade](${SITE.url}/privacidade/)
+- [Termos](${SITE.url}/termos/)
+- [Ivalice Labs](https://ivalice.com.br/): empresa
+
+## Optional
+- [Sitemap](${SITE.url}/sitemap.xml)
+- [ads.txt](${SITE.url}/ads.txt)
+`);
 write('.nojekyll', '');
 write(
   '.gitignore',
