@@ -9,14 +9,18 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
+const LEGISLATION_YEAR = 2026;
+const TODAY = new Date().toISOString().slice(0, 10);
+const CALCULATOR_COUNT = 10;
+
 const SITE = {
   name: 'Calculadora do Trabalhador Brasileiro',
   url: 'https://clt.ivalice.com.br',
-  description:
-    'A ferramenta mais completa para o trabalhador brasileiro. Simples, rápido e 100% gratuito.',
+  description: `Calculadoras CLT gratuitas ${LEGISLATION_YEAR}: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego. Tabelas atualizadas.`,
   email: 'contato@ivalice.com.br',
   org: 'Ivalice Labs',
-  version: '3.4.1',
+  version: '3.5.0',
+  logo: 'https://clt.ivalice.com.br/assets/img/logo.png',
 };
 
 const CALCULATORS = [
@@ -118,7 +122,7 @@ const CALCULATORS = [
     keywords: 'calculadora IRRF',
     resultLabel: 'Imposto devido',
     icon: 'file',
-    home: false,
+    home: true,
   },
 ];
 
@@ -135,8 +139,133 @@ const ICONS = {
   file: `<svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>`,
 };
 
-function head({ title, description, keywords = '', canonical, active = '' }) {
+const FAQ_BY_SLUG = {
+  'salario-liquido': [
+    {
+      q: 'Como é calculado o salário líquido?',
+      a: 'Partimos do bruto, descontamos INSS progressivo e IRRF (com desconto simplificado e redução legal quando aplicável) e outros descontos informados.',
+    },
+    {
+      q: 'As tabelas são de qual ano?',
+      a: `Usamos as tabelas vigentes em ${LEGISLATION_YEAR}. O resultado é estimativa e não substitui o holerite oficial.`,
+    },
+  ],
+  fgts: [
+    {
+      q: 'Qual o percentual do FGTS?',
+      a: 'Em regra, o empregador deposita 8% do salário de contribuição na conta do FGTS do trabalhador.',
+    },
+    {
+      q: 'A multa de 40% entra no cálculo?',
+      a: 'Você pode incluir a multa rescisória de 40% sobre o saldo estimado. Em acordo, a multa típica é de 20%.',
+    },
+  ],
+  ferias: [
+    {
+      q: 'O que é o 1/3 constitucional?',
+      a: 'É o adicional de um terço sobre o valor das férias, previsto na Constituição.',
+    },
+    {
+      q: 'Posso simular a venda de férias?',
+      a: 'Sim. A opção de vender 1/3 adiciona o abono pecuniário correspondente a 10 dias.',
+    },
+  ],
+  'decimo-terceiro': [
+    {
+      q: 'Como funciona o proporcional?',
+      a: 'O 13º é proporcional aos meses trabalhados no ano (fração igual ou superior a 15 dias conta como mês).',
+    },
+    {
+      q: 'Os descontos caem em qual parcela?',
+      a: 'Nesta estimativa, INSS e IRRF são aplicados sobre a 2ª parcela.',
+    },
+  ],
+  rescisao: [
+    {
+      q: 'O aviso prévio é proporcional?',
+      a: 'Sim. Consideramos 30 dias + 3 dias por ano completo de contrato, até o limite de 90 dias.',
+    },
+    {
+      q: 'O saldo de FGTS precisa ser informado?',
+      a: 'É opcional. Se informado, usamos esse valor; senão, estimamos depósitos de 8% pelos meses de contrato.',
+    },
+  ],
+  'hora-extra': [
+    {
+      q: 'Qual a base da hora normal?',
+      a: 'Usamos salário bruto ÷ 220 horas mensais, regra habitual da CLT para jornada padrão.',
+    },
+    {
+      q: 'Qual o adicional de hora extra?',
+      a: '50% em dias úteis e 100% em domingos/feriados nesta calculadora (salvo acordo/convenção diferente).',
+    },
+  ],
+  'adicional-noturno': [
+    {
+      q: 'Qual o percentual do adicional noturno?',
+      a: 'Na CLT urbana, o adicional padrão é de no mínimo 20% sobre a hora diurna.',
+    },
+    {
+      q: 'Qual o horário noturno?',
+      a: 'Em regra urbana, das 22h às 5h. Convenções coletivas podem detalhar exceções.',
+    },
+  ],
+  inss: [
+    {
+      q: 'O INSS é progressivo?',
+      a: `Sim. Cada faixa da tabela ${LEGISLATION_YEAR} incide só sobre a parcela do salário dentro daquela faixa, até o teto.`,
+    },
+    {
+      q: 'Há teto de contribuição?',
+      a: 'Sim. Salários acima do teto previdenciário não geram desconto adicional de INSS do empregado.',
+    },
+  ],
+  'seguro-desemprego': [
+    {
+      q: 'Como é calculado o valor da parcela?',
+      a: `Com a média salarial e as faixas do MTE ${LEGISLATION_YEAR} (80%, faixa intermediária ou teto), sem ficar abaixo do salário mínimo.`,
+    },
+    {
+      q: 'Quantas parcelas tenho direito?',
+      a: 'Depende do tempo trabalhado nos últimos 36 meses e se é 1ª, 2ª ou 3ª+ solicitação.',
+    },
+  ],
+  irrf: [
+    {
+      q: 'O que é o desconto simplificado?',
+      a: `Em ${LEGISLATION_YEAR}, o limite mensal do desconto simplificado é R$ 607,20. Usamos o cenário mais vantajoso frente às deduções legais.`,
+    },
+    {
+      q: 'Quem ganha até R$ 5.000 paga IRRF?',
+      a: 'Com a redução legal vigente, o imposto mensal tende a zerar para rendimentos tributáveis até R$ 5.000.',
+    },
+  ],
+};
+
+function head({ title, description, keywords = '', canonical, active = '', jsonLd = null }) {
   const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+  const absolute = `${SITE.url}${canonical}`;
+  const blocks = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+  const defaultLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    inLanguage: 'pt-BR',
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.org,
+      email: SITE.email,
+      url: 'https://ivalice.com.br',
+      logo: SITE.logo,
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE.url}/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+  const allLd = blocks.length ? blocks : [defaultLd];
   return `<!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
@@ -146,15 +275,23 @@ function head({ title, description, keywords = '', canonical, active = '' }) {
   <meta name="description" content="${esc(description)}">
   ${keywords ? `<meta name="keywords" content="${esc(keywords)}">` : ''}
   <meta name="theme-color" content="#1b5e3b">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="${SITE.url}${canonical}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="author" content="${esc(SITE.org)}">
+  <link rel="canonical" href="${absolute}">
+  <link rel="alternate" hreflang="pt-BR" href="${absolute}">
+  <link rel="alternate" hreflang="x-default" href="${absolute}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="${esc(fullTitle)}">
   <meta property="og:description" content="${esc(description)}">
-  <meta property="og:url" content="${SITE.url}${canonical}">
+  <meta property="og:url" content="${absolute}">
   <meta property="og:site_name" content="${esc(SITE.name)}">
+  <meta property="og:image" content="${SITE.logo}">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="${esc(fullTitle)}">
+  <meta name="twitter:description" content="${esc(description)}">
+  <meta name="twitter:image" content="${SITE.logo}">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -185,18 +322,7 @@ function head({ title, description, keywords = '', canonical, active = '' }) {
     };
   </script>
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <script type="application/ld+json">${JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.url,
-    publisher: { '@type': 'Organization', name: SITE.org, email: SITE.email },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE.url}/?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
-  })}</script>
+  ${allLd.map((block) => `<script type="application/ld+json">${JSON.stringify(block)}</script>`).join('\n  ')}
 </head>
 <body class="min-h-screen bg-page text-ink antialiased" data-active="${active}">`;
 }
@@ -211,7 +337,7 @@ function esc(s) {
 
 function logoBlock() {
   return `<a href="/" class="flex items-center gap-3 shrink-0">
-    <img src="/assets/img/logo.png" alt="" width="38" height="40" class="h-10 w-[38px] object-contain">
+    <img src="/assets/img/logo.png" alt="Calculadora do Trabalhador Brasileiro" width="38" height="40" class="h-10 w-[38px] object-contain">
     <span class="leading-tight">
       <span class="block font-display text-[15px] font-extrabold tracking-wide text-brand sm:text-[18px]">CALCULADORA DO TRABALHADOR</span>
       <span class="block text-[10px] font-semibold uppercase tracking-wide text-ink-muted sm:text-[11px]">Brasileiro</span>
@@ -255,7 +381,7 @@ function header(active) {
 }
 
 function footer(variant = 'home') {
-  const calcLinks = CALCULATORS.filter((c) => c.home || c.slug === 'irrf')
+  const calcLinks = CALCULATORS
     .map((c) => `<a href="/calculadoras/${c.slug}/" class="text-ink-soft hover:text-brand">${esc(c.title)}</a>`)
     .join('\n              ');
 
@@ -375,11 +501,45 @@ function homePage() {
     .join('\n            ');
 
   return `${head({
-    title: SITE.name,
+    title: `${SITE.name} — Calculadoras CLT ${LEGISLATION_YEAR}`,
     description: SITE.description,
-    keywords: 'calculadora trabalhista, salário líquido, FGTS, férias, 13º, rescisão, CLT',
+    keywords: `calculadora trabalhista ${LEGISLATION_YEAR}, salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF, CLT`,
     canonical: '/',
     active: 'home',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: SITE.name,
+        url: SITE.url,
+        inLanguage: 'pt-BR',
+        description: SITE.description,
+        publisher: {
+          '@type': 'Organization',
+          name: SITE.org,
+          email: SITE.email,
+          url: 'https://ivalice.com.br',
+          logo: SITE.logo,
+        },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${SITE.url}/?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Calculadoras trabalhistas',
+        numberOfItems: CALCULATORS.length,
+        itemListElement: CALCULATORS.map((c, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: c.title,
+          url: `${SITE.url}/calculadoras/${c.slug}/`,
+        })),
+      },
+    ],
   })}
   <div class="flex min-h-screen flex-col">
     ${header('home')}
@@ -405,7 +565,7 @@ function homePage() {
               <p class="mt-1 text-sm text-ink-muted">Selecione uma ferramenta para começar</p>
             </div>
             <a href="#calculadoras" class="inline-flex items-center gap-2 text-sm font-semibold text-brand">
-              Ver todas as 24 calculadoras
+              Ver todas as ${CALCULATOR_COUNT} calculadoras
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -495,7 +655,7 @@ function formFields(id) {
       </div>
       <div class="grid gap-6 sm:grid-cols-2">
         <label class="block min-w-0 flex-1"><span class="field-label">Tipo de demissão</span>
-          <select class="field" name="dismissalType">
+          <select class="field" name="dismissalType" required>
             <option value="" disabled selected>Selecione</option>
             <option value="WITHOUT_JUST_CAUSE">Sem justa causa</option>
             <option value="AGREEMENT">Acordo</option>
@@ -505,9 +665,10 @@ function formFields(id) {
         </label>
         ${number('vacationDays', 'Saldo de férias (dias)', { min: '0', max: '60', placeholder: '0' })}
       </div>
+      ${money('fgtsBalance', 'Saldo FGTS atual (R$) — opcional', { placeholder: 'Se vazio, estimamos 8% × meses' })}
       <div class="flex flex-col gap-3 text-sm text-ink-soft">
         <label class="flex items-center gap-3"><input type="checkbox" name="workedNotice" class="h-4 w-4 rounded border-line"> Aviso prévio trabalhado</label>
-        <label class="flex items-center gap-3"><input type="checkbox" name="includeFgts" class="h-4 w-4 rounded border-line"> Incluir saque FGTS estimado</label>
+        <label class="flex items-center gap-3"><input type="checkbox" name="includeFgts" class="h-4 w-4 rounded border-line"> Incluir saque FGTS</label>
       </div>`,
     hora_extra: `
       <div class="grid gap-6 sm:grid-cols-2">
@@ -552,12 +713,66 @@ function formFields(id) {
 
 function calcPage(c) {
   const canonical = `/calculadoras/${c.slug}/`;
+  const absolute = `${SITE.url}${canonical}`;
+  const seoTitle = `Calculadora de ${c.title} CLT ${LEGISLATION_YEAR}`;
+  const seoDescription = `${c.blurb} Calculadora gratuita com tabelas ${LEGISLATION_YEAR}. Resultado no navegador, sem cadastro.`;
+  const faqs = FAQ_BY_SLUG[c.slug] || [];
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Calculadoras', item: `${SITE.url}/#calculadoras` },
+      { '@type': 'ListItem', position: 3, name: c.title, item: absolute },
+    ],
+  };
+  const appLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: seoTitle,
+    url: absolute,
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+    description: seoDescription,
+    inLanguage: 'pt-BR',
+    dateModified: TODAY,
+    publisher: { '@type': 'Organization', name: SITE.org, url: 'https://ivalice.com.br' },
+  };
+  const faqLd = faqs.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
+  const faqHtml = faqs.length
+    ? `<section class="space-y-4 rounded-3xl bg-white p-6 shadow-card sm:p-8" aria-labelledby="faq-heading">
+          <h2 id="faq-heading" class="font-display text-xl font-semibold text-ink">Perguntas frequentes</h2>
+          <div class="space-y-4">
+            ${faqs
+              .map(
+                (f) => `<div>
+              <h3 class="font-semibold text-ink">${esc(f.q)}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-ink-soft">${esc(f.a)}</p>
+            </div>`,
+              )
+              .join('\n            ')}
+          </div>
+        </section>`
+    : '';
+
   return `${head({
-    title: `Calculadora de ${c.title}`,
-    description: c.blurb,
-    keywords: c.keywords,
+    title: seoTitle,
+    description: seoDescription,
+    keywords: `${c.keywords}, ${c.title} ${LEGISLATION_YEAR}, calculadora CLT`,
     canonical,
     active: 'calcs',
+    jsonLd: [appLd, breadcrumbLd, faqLd].filter(Boolean),
   })}
   <div class="flex min-h-screen flex-col">
     ${header('calcs')}
@@ -572,8 +787,8 @@ function calcPage(c) {
         </nav>
 
         <div>
-          <h1 class="font-display text-3xl font-bold text-ink sm:text-[32px]">${esc(c.title)}</h1>
-          <p class="mt-2 text-lg text-ink-soft">Informe os dados para o cálculo</p>
+          <h1 class="font-display text-3xl font-bold text-ink sm:text-[32px]">Calculadora de ${esc(c.title)}</h1>
+          <p class="mt-2 text-lg text-ink-soft">${esc(c.blurb)} Tabelas de referência ${LEGISLATION_YEAR}.</p>
         </div>
 
         <div class="ad-slot" data-ads="off" data-ad-slot="calc-top"></div>
@@ -591,7 +806,7 @@ function calcPage(c) {
           <div>
             <h2 class="font-display text-xl font-semibold text-ink">Detalhamento</h2>
             <div class="mt-2 divide-y divide-line" data-breakdown></div>
-            <p class="mt-4 text-sm italic text-ink-faint">* Valores aproximados com tabelas de referência ${new Date().getFullYear()}. Confira a legislação vigente.</p>
+            <p class="mt-4 text-sm italic text-ink-faint">* Estimativa com tabelas INSS/IRRF/Seguro ${LEGISLATION_YEAR}. Não substitui TRCT, contador ou advogado. Confira a legislação vigente.</p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
             <button type="button" data-share class="btn-secondary">
@@ -604,6 +819,8 @@ function calcPage(c) {
             </button>
           </div>
         </section>
+
+        ${faqHtml}
       </div>
     </main>
     ${footer('calc')}
@@ -774,24 +991,43 @@ write(
 );
 
 const urls = [
-  '/',
-  '/privacidade/',
-  '/termos/',
-  '/sobre/',
-  '/contato/',
-  ...CALCULATORS.map((c) => `/calculadoras/${c.slug}/`),
+  { path: '/', priority: '1.0', changefreq: 'weekly' },
+  { path: '/privacidade/', priority: '0.3', changefreq: 'yearly' },
+  { path: '/termos/', priority: '0.3', changefreq: 'yearly' },
+  { path: '/sobre/', priority: '0.4', changefreq: 'monthly' },
+  { path: '/contato/', priority: '0.4', changefreq: 'monthly' },
+  ...CALCULATORS.map((c) => ({
+    path: `/calculadoras/${c.slug}/`,
+    priority: '0.9',
+    changefreq: 'weekly',
+  })),
 ];
 write(
   'sitemap.xml',
   `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${SITE.url}${u}</loc></url>`).join('\n')}
+${urls
+  .map(
+    (u) => `  <url>
+    <loc>${SITE.url}${u.path}</loc>
+    <lastmod>${TODAY}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`,
+  )
+  .join('\n')}
 </urlset>
 `,
 );
 write(
   'robots.txt',
   `User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: ${SITE.url}/sitemap.xml

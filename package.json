@@ -1,0 +1,11 @@
+{
+  "name": "site-calculadora-trabalhador",
+  "version": "3.5.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "start": "python3 -m http.server 5173",
+    "dev": "npm run generate && npm start"
+  }
+}

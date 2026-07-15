@@ -104,6 +104,7 @@ function runCalculator(id, form) {
       };
     }
     case 'rescisao': {
+      const fgtsRaw = form.elements.fgtsBalance?.value?.trim();
       const r = calculateRescisao({
         grossSalary: money(form, 'gross'),
         dependents: num(form, 'dependents'),
@@ -113,6 +114,7 @@ function runCalculator(id, form) {
         vacationDaysBalance: num(form, 'vacationDays'),
         hasWorkedNoticePeriod: checked(form, 'workedNotice'),
         includeFgtsWithdrawal: checked(form, 'includeFgts'),
+        fgtsBalanceCents: fgtsRaw ? money(form, 'fgtsBalance') : null,
       });
       return {
         primary: r,
@@ -219,6 +221,9 @@ function renderRows(container, rows) {
       if (row.raw) {
         return `<div class="flex items-start justify-between gap-4 py-3 text-base"><span class="text-ink-soft">${row.label}</span><span class="font-semibold text-ink">${row.amountCents}</span></div>`;
       }
+      if (row.isInfo) {
+        return `<div class="flex items-start justify-between gap-4 py-3 text-base"><span class="text-ink-soft">${row.label} <span class="text-xs text-ink-faint">(informativo)</span></span><span class="font-semibold text-ink-muted">${formatBRL(row.amountCents)}</span></div>`;
+      }
       const value = row.isDiscount ? `-${formatBRL(row.amountCents)}` : formatBRL(row.amountCents);
       const cls = row.isDiscount ? 'text-danger' : 'text-ink';
       return `<div class="flex items-start justify-between gap-4 py-3 text-base"><span class="text-ink-soft">${row.label}</span><span class="font-semibold ${cls}">${value}</span></div>`;
@@ -293,7 +298,8 @@ if (form) {
     }
   });
 
-  document.querySelector('[data-save]')?.addEventListener('click', () => {
+  const saveBtn = document.querySelector('[data-save]');
+  saveBtn?.addEventListener('click', () => {
     const raw = sessionStorage.getItem(`clt-save-${id}`);
     if (!raw) {
       alert('Calcule antes de salvar.');
@@ -301,8 +307,17 @@ if (form) {
     }
     const key = 'clt-saved-calcs';
     const list = JSON.parse(localStorage.getItem(key) || '[]');
-    list.unshift(JSON.parse(raw));
+    const entry = JSON.parse(raw);
+    entry.title = getCalculator(location.pathname.split('/').filter(Boolean).pop())?.title || id;
+    entry.resultText = valueEl?.textContent || '';
+    list.unshift(entry);
     localStorage.setItem(key, JSON.stringify(list.slice(0, 50)));
-    alert('Cálculo salvo neste navegador.');
+    if (saveBtn) {
+      const prev = saveBtn.innerHTML;
+      saveBtn.textContent = 'Salvo neste aparelho';
+      setTimeout(() => {
+        saveBtn.innerHTML = prev;
+      }, 1800);
+    }
   });
 }

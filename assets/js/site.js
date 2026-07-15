@@ -3,18 +3,18 @@ export const SITE = {
   shortName: 'Calculadora do Trabalhador',
   url: 'https://clt.ivalice.com.br',
   description:
-    'A ferramenta mais completa para o trabalhador brasileiro. Calcule salário líquido, FGTS, férias, 13º, rescisão e mais — simples, rápido e 100% gratuito.',
+    'Calculadoras CLT gratuitas 2026: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego. Tabelas atualizadas.',
   contactEmail: 'contato@ivalice.com.br',
   org: 'Ivalice Labs',
-  version: '3.4.1',
+  version: '3.5.0',
   playStoreUrl: 'https://play.google.com/store/apps/details?id=br.com.calctrabalhador',
 };
 
-export const LEGISLATION_YEAR = 2024;
+export const LEGISLATION_YEAR = 2026;
 export const ADS_ENABLED = false;
-export const ADSENSE_CLIENT = '';
+export const ADSENSE_CLIENT = 'ca-pub-3187286744795052';
 
-/** Cards da home (layout Figma — 9 ferramentas principais). */
+/** Cards da home (layout Figma — catálogo completo). */
 export const HOME_CALCULATORS = [
   {
     slug: 'salario-liquido',
@@ -63,6 +63,12 @@ export const HOME_CALCULATORS = [
     title: 'INSS',
     blurb: 'Tabela atualizada de contribuição previdenciária.',
     icon: 'shield',
+  },
+  {
+    slug: 'irrf',
+    title: 'IRRF',
+    blurb: 'Imposto de Renda Retido na Fonte com dependentes.',
+    icon: 'file',
   },
   {
     slug: 'seguro-desemprego',
