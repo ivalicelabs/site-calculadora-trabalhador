@@ -5,6 +5,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  HOWTO_BY_SLUG,
+  INDEXNOW_KEY,
+  RELATED_BY_SLUG,
+  guides,
+  tabelasBody,
+} from './content-seo.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -356,6 +363,7 @@ function header(active) {
       <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
         ${link('home', '/', 'Início')}
         ${link('calcs', '/#calculadoras', 'Calculadoras')}
+        ${link('guides', '/guias/', 'Guias')}
         ${link('saved', '/salvos/', 'Salvos')}
       </nav>
       <div class="hidden items-center gap-4 lg:flex">
@@ -372,6 +380,8 @@ function header(active) {
       <nav class="flex flex-col gap-1 py-4 text-[15px]">
         <a href="/" class="rounded-lg px-3 py-2.5 font-semibold text-brand">Início</a>
         <a href="/#calculadoras" class="rounded-lg px-3 py-2.5 text-ink-muted">Calculadoras</a>
+        <a href="/guias/" class="rounded-lg px-3 py-2.5 text-ink-muted">Guias</a>
+        <a href="/tabelas-${LEGISLATION_YEAR}/" class="rounded-lg px-3 py-2.5 text-ink-muted">Tabelas ${LEGISLATION_YEAR}</a>
         <a href="/salvos/" class="rounded-lg px-3 py-2.5 text-ink-muted">Salvos</a>
         <a href="/sobre/" class="rounded-lg px-3 py-2.5 text-ink-muted">Sobre</a>
         <a href="/contato/" class="rounded-lg px-3 py-2.5 text-ink-muted">Contato</a>
@@ -582,6 +592,14 @@ function homePage() {
             <p class="mt-1 text-sm text-ink-muted">Informação é poder! Fique por dentro.</p>
           </div>
           <div class="flex flex-col gap-3">${rights}</div>
+          <a href="/tabelas-${LEGISLATION_YEAR}/" class="block rounded-2xl bg-brand-deep p-5 text-white shadow-card transition hover:brightness-105">
+            <p class="font-display text-base font-bold">Tabelas ${LEGISLATION_YEAR}</p>
+            <p class="mt-1 text-sm text-white/80">INSS, IRRF e seguro-desemprego atualizados.</p>
+          </a>
+          <a href="/guias/" class="block rounded-2xl border border-line bg-white p-5 shadow-card transition hover:border-brand/30">
+            <p class="font-display text-base font-bold text-ink">Guias práticos</p>
+            <p class="mt-1 text-sm text-ink-muted">Salário líquido, rescisão e mais — passo a passo.</p>
+          </a>
           <div class="ad-slot rounded-2xl border border-dashed border-line bg-white p-6 text-center text-xs text-ink-faint" data-ads="off" data-ad-slot="home-sidebar">
             Espaço para anúncio
           </div>
@@ -719,6 +737,30 @@ function calcPage(c) {
   const seoTitle = `Calculadora de ${c.title} CLT ${LEGISLATION_YEAR}`;
   const seoDescription = `${c.blurb} Calculadora gratuita com tabelas ${LEGISLATION_YEAR}. Resultado no navegador, sem cadastro.`;
   const faqs = FAQ_BY_SLUG[c.slug] || [];
+  const howto = HOWTO_BY_SLUG[c.slug] || '';
+  const relatedSlugs = RELATED_BY_SLUG[c.slug] || [];
+  const relatedHtml = relatedSlugs.length
+    ? `<section class="space-y-3" aria-labelledby="related-heading">
+          <h2 id="related-heading" class="font-display text-xl font-semibold text-ink">Calculadoras relacionadas</h2>
+          <div class="flex flex-wrap gap-2">
+            ${relatedSlugs
+              .map((slug) => {
+                const rel = CALCULATORS.find((x) => x.slug === slug);
+                if (!rel) return '';
+                return `<a href="/calculadoras/${rel.slug}/" class="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-brand hover:border-brand/40">${esc(rel.title)}</a>`;
+              })
+              .join('\n            ')}
+            <a href="/tabelas-${LEGISLATION_YEAR}/" class="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-ink-soft hover:border-brand/40">Tabelas ${LEGISLATION_YEAR}</a>
+          </div>
+        </section>`
+    : '';
+  const howtoHtml = howto
+    ? `<section class="space-y-2 rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8" aria-labelledby="howto-heading">
+          <h2 id="howto-heading" class="font-display text-xl font-semibold text-ink">Como funciona</h2>
+          <p class="text-sm leading-relaxed text-ink-soft">${esc(howto)}</p>
+          <p class="text-sm text-ink-muted"><a class="font-semibold text-brand underline" href="/guias/">Ver todos os guias</a> · <a class="font-semibold text-brand underline" href="/tabelas-${LEGISLATION_YEAR}/">Tabelas ${LEGISLATION_YEAR}</a></p>
+        </section>`
+    : '';
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -822,7 +864,9 @@ function calcPage(c) {
           </div>
         </section>
 
+        ${howtoHtml}
         ${faqHtml}
+        ${relatedHtml}
       </div>
     </main>
     ${footer('calc')}
@@ -1016,6 +1060,102 @@ for (const c of CALCULATORS) {
 write('privacidade/index.html', legalPage('privacy'));
 write('termos/index.html', legalPage('terms'));
 write('salvos/index.html', salvosPage());
+
+const GUIDE_LIST = guides(LEGISLATION_YEAR);
+write(
+  'guias/index.html',
+  simplePage(
+    `Guias trabalhistas ${LEGISLATION_YEAR}`,
+    '/guias/',
+    `<p>Artigos práticos para entender os cálculos da CLT. Use junto com as calculadoras gratuitas.</p>
+     <ul class="mt-8 space-y-4">
+       ${GUIDE_LIST.map(
+         (g) => `<li class="rounded-2xl border border-line bg-white p-5 shadow-card">
+         <a href="/guias/${g.slug}/" class="font-display text-lg font-bold text-ink hover:text-brand">${esc(g.title)}</a>
+         <p class="mt-1 text-sm text-ink-muted">${esc(g.description)}</p>
+       </li>`,
+       ).join('\n       ')}
+     </ul>
+     <p class="mt-8"><a class="font-semibold text-brand underline" href="/tabelas-${LEGISLATION_YEAR}/">Ver tabelas ${LEGISLATION_YEAR}</a></p>`,
+    { active: 'guides' },
+  ),
+);
+for (const g of GUIDE_LIST) {
+  const related = (g.related || [])
+    .map((slug) => CALCULATORS.find((c) => c.slug === slug))
+    .filter(Boolean)
+    .map(
+      (c) =>
+        `<a href="/calculadoras/${c.slug}/" class="rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-brand">${esc(c.title)}</a>`,
+    )
+    .join(' ');
+  write(
+    `guias/${g.slug}/index.html`,
+    `${head({
+      title: g.title,
+      description: g.description,
+      keywords: g.keywords,
+      canonical: `/guias/${g.slug}/`,
+      active: 'guides',
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: g.title,
+        description: g.description,
+        dateModified: TODAY,
+        inLanguage: 'pt-BR',
+        author: { '@type': 'Organization', name: SITE.org },
+        publisher: { '@type': 'Organization', name: SITE.org, logo: SITE.logo },
+        mainEntityOfPage: `${SITE.url}/guias/${g.slug}/`,
+      },
+    })}
+  <div class="flex min-h-screen flex-col">
+    ${header('guides')}
+    <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-8">
+      <nav class="mb-6 flex flex-wrap items-center gap-2 text-sm text-ink-soft" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand">Início</a>
+        <span class="text-ink-faint">&gt;</span>
+        <a href="/guias/" class="hover:text-brand">Guias</a>
+        <span class="text-ink-faint">&gt;</span>
+        <span class="font-semibold text-brand-deep">${esc(g.title)}</span>
+      </nav>
+      <h1 class="font-display text-3xl font-bold text-ink">${esc(g.title)}</h1>
+      <div class="prose-calc mt-8 space-y-3 text-base leading-relaxed text-ink-soft">${g.body}</div>
+      ${related ? `<div class="mt-10"><p class="font-display text-lg font-semibold text-ink">Calcule agora</p><div class="mt-3 flex flex-wrap gap-2">${related}</div></div>` : ''}
+    </main>
+    ${footer('calc')}
+  </div>
+${scripts()}`,
+  );
+}
+
+write(
+  `tabelas-${LEGISLATION_YEAR}/index.html`,
+  `${head({
+    title: `Tabelas INSS, IRRF e Seguro-Desemprego ${LEGISLATION_YEAR}`,
+    description: `Tabelas atualizadas ${LEGISLATION_YEAR}: INSS progressivo, IRRF mensal e faixas do seguro-desemprego. Use com as calculadoras CLT.`,
+    keywords: `tabela INSS ${LEGISLATION_YEAR}, tabela IRRF ${LEGISLATION_YEAR}, seguro-desemprego ${LEGISLATION_YEAR}`,
+    canonical: `/tabelas-${LEGISLATION_YEAR}/`,
+    active: 'guides',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `Tabelas trabalhistas ${LEGISLATION_YEAR}`,
+      dateModified: TODAY,
+      url: `${SITE.url}/tabelas-${LEGISLATION_YEAR}/`,
+    },
+  })}
+  <div class="flex min-h-screen flex-col">
+    ${header('guides')}
+    <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-8">
+      <h1 class="font-display text-3xl font-bold text-ink">Tabelas ${LEGISLATION_YEAR}</h1>
+      <div class="mt-8 space-y-3 text-base leading-relaxed text-ink-soft">${tabelasBody(LEGISLATION_YEAR)}</div>
+    </main>
+    ${footer('calc')}
+  </div>
+${scripts()}`,
+);
+
 write(
   'sobre/index.html',
   simplePage(
@@ -1023,7 +1163,8 @@ write(
     '/sobre/',
     `<p>A <strong>${SITE.name}</strong> é um produto da <strong>${SITE.org}</strong>. Nosso objetivo é ajudar o trabalhador brasileiro a entender direitos e cálculos da CLT de forma simples e gratuita.</p>
      <p>As fórmulas seguem as mesmas regras do aplicativo Android. Sempre confira a legislação vigente e, em caso de dúvida, consulte um profissional.</p>
-     <p>Contato: <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a></p>`,
+     <p>Contato: <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
+     <p class="mt-6"><a class="font-semibold text-brand underline" href="/guias/">Ler guias</a> · <a class="font-semibold text-brand underline" href="/tabelas-${LEGISLATION_YEAR}/">Ver tabelas ${LEGISLATION_YEAR}</a></p>`,
   ),
 );
 write(
@@ -1039,10 +1180,17 @@ write(
 
 const urls = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
+  { path: '/guias/', priority: '0.85', changefreq: 'weekly' },
+  { path: `/tabelas-${LEGISLATION_YEAR}/`, priority: '0.9', changefreq: 'monthly' },
   { path: '/privacidade/', priority: '0.3', changefreq: 'yearly' },
   { path: '/termos/', priority: '0.3', changefreq: 'yearly' },
   { path: '/sobre/', priority: '0.4', changefreq: 'monthly' },
   { path: '/contato/', priority: '0.4', changefreq: 'monthly' },
+  ...GUIDE_LIST.map((g) => ({
+    path: `/guias/${g.slug}/`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  })),
   ...CALCULATORS.map((c) => ({
     path: `/calculadoras/${c.slug}/`,
     priority: '0.9',
@@ -1093,7 +1241,10 @@ Sitemap: ${SITE.url}/sitemap.xml
 `,
 );
 write('CNAME', 'clt.ivalice.com.br\n');
-write('llms.txt', `# Calculadora do Trabalhador Brasileiro
+write(`${INDEXNOW_KEY}.txt`, `${INDEXNOW_KEY}\n`);
+write(
+  'llms.txt',
+  `# Calculadora do Trabalhador Brasileiro
 > Calculadoras CLT gratuitas com tabelas ${LEGISLATION_YEAR}: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego.
 
 Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas e não substituem holerite, TRCT ou orientação profissional.
@@ -1101,18 +1252,22 @@ Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas 
 ## Calculadoras
 ${CALCULATORS.map((c) => `- [${c.title}](${SITE.url}/calculadoras/${c.slug}/): ${c.blurb}`).join('\n')}
 
+## Guias e tabelas
+- [Guias](${SITE.url}/guias/): artigos práticos CLT
+${GUIDE_LIST.map((g) => `- [${g.title}](${SITE.url}/guias/${g.slug}/): ${g.description}`).join('\n')}
+- [Tabelas ${LEGISLATION_YEAR}](${SITE.url}/tabelas-${LEGISLATION_YEAR}/): INSS, IRRF e seguro-desemprego
+
 ## Institucional
 - [Início](${SITE.url}/): lista de calculadoras
 - [Sobre](${SITE.url}/sobre/)
 - [Contato](${SITE.url}/contato/): ${SITE.email}
-- [Privacidade](${SITE.url}/privacidade/)
-- [Termos](${SITE.url}/termos/)
 - [Ivalice Labs](https://ivalice.com.br/): empresa
 
 ## Optional
 - [Sitemap](${SITE.url}/sitemap.xml)
 - [ads.txt](${SITE.url}/ads.txt)
-`);
+`,
+);
 write('.nojekyll', '');
 write(
   '.gitignore',

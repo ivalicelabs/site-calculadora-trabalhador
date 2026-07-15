@@ -15,12 +15,18 @@ Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas 
 - [Seguro Desemprego](https://clt.ivalice.com.br/calculadoras/seguro-desemprego/): Cálculo de parcelas e elegibilidade.
 - [IRRF](https://clt.ivalice.com.br/calculadoras/irrf/): Imposto de Renda Retido na Fonte com dependentes.
 
+## Guias e tabelas
+- [Guias](https://clt.ivalice.com.br/guias/): artigos práticos CLT
+- [Como calcular o salário líquido CLT em 2026](https://clt.ivalice.com.br/guias/como-calcular-salario-liquido/): Passo a passo do salário líquido com INSS e IRRF 2026: o que desconta, dependentes e exemplos.
+- [Como calcular rescisão trabalhista em 2026](https://clt.ivalice.com.br/guias/como-calcular-rescisao/): O que entra na rescisão CLT: saldo, férias, 13º, aviso prévio proporcional e FGTS. Guia 2026.
+- [Tabela INSS e IRRF 2026 — resumo prático](https://clt.ivalice.com.br/guias/tabela-inss-irrf/): Resumo das tabelas INSS e IRRF 2026 para folha de pagamento, com links para calculadoras gratuitas.
+- [Seguro-desemprego 2026: quem tem direito e como calcular](https://clt.ivalice.com.br/guias/seguro-desemprego-quem-tem-direito/): Regras de elegibilidade, número de parcelas e valor do seguro-desemprego 2026.
+- [Tabelas 2026](https://clt.ivalice.com.br/tabelas-2026/): INSS, IRRF e seguro-desemprego
+
 ## Institucional
 - [Início](https://clt.ivalice.com.br/): lista de calculadoras
 - [Sobre](https://clt.ivalice.com.br/sobre/)
 - [Contato](https://clt.ivalice.com.br/contato/): contato@ivalice.com.br
-- [Privacidade](https://clt.ivalice.com.br/privacidade/)
-- [Termos](https://clt.ivalice.com.br/termos/)
 - [Ivalice Labs](https://ivalice.com.br/): empresa
 
 ## Optional
