@@ -71,6 +71,7 @@
       <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
         <a href="/" class="relative font-display text-[15px] nav-active font-semibold text-brand">Início</a>
         <a href="/#calculadoras" class="relative font-display text-[15px] font-medium text-ink-muted hover:text-brand">Calculadoras</a>
+        <a href="/salvos/" class="relative font-display text-[15px] font-medium text-ink-muted hover:text-brand">Salvos</a>
       </nav>
       <div class="hidden items-center gap-4 lg:flex">
         <label class="relative flex h-12 w-80 items-center gap-3 rounded-xl border border-line bg-white px-4">
@@ -86,6 +87,7 @@
       <nav class="flex flex-col gap-1 py-4 text-[15px]">
         <a href="/" class="rounded-lg px-3 py-2.5 font-semibold text-brand">Início</a>
         <a href="/#calculadoras" class="rounded-lg px-3 py-2.5 text-ink-muted">Calculadoras</a>
+        <a href="/salvos/" class="rounded-lg px-3 py-2.5 text-ink-muted">Salvos</a>
         <a href="/sobre/" class="rounded-lg px-3 py-2.5 text-ink-muted">Sobre</a>
         <a href="/contato/" class="rounded-lg px-3 py-2.5 text-ink-muted">Contato</a>
         <a href="/privacidade/" class="rounded-lg px-3 py-2.5 text-ink-muted">Privacidade</a>
@@ -102,7 +104,7 @@
         <form data-hero-search class="hero-search flex w-full max-w-[720px] items-center gap-3 rounded-[20px] border-2 border-brand bg-white px-4 py-3 sm:px-6 sm:h-16">
           <svg class="h-6 w-6 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
           <input name="q" type="search" placeholder="Ex: Salário líquido com 2 dependentes..." class="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-ink-faint" autocomplete="off">
-          <button type="submit" class="shrink-0 rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white">Buscar</button>
+          <a href="#calculadoras" role="button" data-hero-search-submit class="shrink-0 rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white no-underline">Buscar</a>
         </form>
         <div data-search-results class="hidden w-full max-w-[720px] rounded-2xl border border-line bg-white p-2 shadow-card"></div>
       </section>

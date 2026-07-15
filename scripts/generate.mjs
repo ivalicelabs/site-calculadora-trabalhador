@@ -356,6 +356,7 @@ function header(active) {
       <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
         ${link('home', '/', 'Início')}
         ${link('calcs', '/#calculadoras', 'Calculadoras')}
+        ${link('saved', '/salvos/', 'Salvos')}
       </nav>
       <div class="hidden items-center gap-4 lg:flex">
         <label class="relative flex h-12 w-80 items-center gap-3 rounded-xl border border-line bg-white px-4">
@@ -371,6 +372,7 @@ function header(active) {
       <nav class="flex flex-col gap-1 py-4 text-[15px]">
         <a href="/" class="rounded-lg px-3 py-2.5 font-semibold text-brand">Início</a>
         <a href="/#calculadoras" class="rounded-lg px-3 py-2.5 text-ink-muted">Calculadoras</a>
+        <a href="/salvos/" class="rounded-lg px-3 py-2.5 text-ink-muted">Salvos</a>
         <a href="/sobre/" class="rounded-lg px-3 py-2.5 text-ink-muted">Sobre</a>
         <a href="/contato/" class="rounded-lg px-3 py-2.5 text-ink-muted">Contato</a>
         <a href="/privacidade/" class="rounded-lg px-3 py-2.5 text-ink-muted">Privacidade</a>
@@ -552,7 +554,7 @@ function homePage() {
         <form data-hero-search class="hero-search flex w-full max-w-[720px] items-center gap-3 rounded-[20px] border-2 border-brand bg-white px-4 py-3 sm:px-6 sm:h-16">
           <svg class="h-6 w-6 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
           <input name="q" type="search" placeholder="Ex: Salário líquido com 2 dependentes..." class="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-ink-faint" autocomplete="off">
-          <button type="submit" class="shrink-0 rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white">Buscar</button>
+          <a href="#calculadoras" role="button" data-hero-search-submit class="shrink-0 rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white no-underline">Buscar</a>
         </form>
         <div data-search-results class="hidden w-full max-w-[720px] rounded-2xl border border-line bg-white p-2 shadow-card"></div>
       </section>
@@ -795,7 +797,7 @@ function calcPage(c) {
 
         <form id="calc-form" data-calc-id="${c.id}" class="space-y-8 rounded-3xl bg-white p-6 shadow-card sm:p-10" novalidate>
           ${formFields(c.id)}
-          <button type="submit" class="btn-primary">Calcular</button>
+          <a href="#results" role="button" data-calc-submit class="btn-primary">Calcular</a>
         </form>
 
         <section id="results" class="result-panel space-y-8" hidden>
@@ -809,14 +811,14 @@ function calcPage(c) {
             <p class="mt-4 text-sm italic text-ink-faint">* Estimativa com tabelas INSS/IRRF/Seguro ${LEGISLATION_YEAR}. Não substitui TRCT, contador ou advogado. Confira a legislação vigente.</p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
-            <button type="button" data-share class="btn-secondary">
+            <a href="#" role="button" data-share class="btn-secondary">
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M8 7l4-4 4 4"/></svg>
               Compartilhar
-            </button>
-            <button type="button" data-save class="btn-primary h-14 text-base">
+            </a>
+            <a href="#" role="button" data-save class="btn-primary h-14 text-base">
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
               Salvar
-            </button>
+            </a>
           </div>
         </section>
 
@@ -949,17 +951,61 @@ function legalPage(kind) {
 ${scripts()}`;
 }
 
-function simplePage(title, canonical, html) {
-  return `${head({ title, description: `${title} — ${SITE.name}`, canonical, active: '' })}
+function simplePage(title, canonical, html, { active = '', noindex = false, extraScripts = '' } = {}) {
+  const robots = noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+  return `${head({
+    title,
+    description: `${title} — ${SITE.name}`,
+    canonical,
+    active,
+    jsonLd: noindex
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: title,
+            url: `${SITE.url}${canonical}`,
+          },
+        ]
+      : null,
+  }).replace(
+    'content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"',
+    `content="${robots}"`,
+  )}
   <div class="flex min-h-screen flex-col">
-    ${header('')}
+    ${header(active)}
     <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-8">
       <h1 class="font-display text-3xl font-bold text-ink">${esc(title)}</h1>
       <div class="mt-8 space-y-4 text-base leading-relaxed text-ink-soft">${html}</div>
     </main>
     ${footer('calc')}
   </div>
-${scripts()}`;
+${scripts(extraScripts)}`;
+}
+
+function salvosPage() {
+  return simplePage(
+    'Cálculos salvos',
+    '/salvos/',
+    `<p class="text-ink-soft">Seus cálculos ficam só neste aparelho (navegador). Nada é enviado aos nossos servidores.</p>
+     <div class="mt-6 flex flex-wrap items-center gap-3">
+       <a href="/#calculadoras" class="btn-secondary h-12 px-5 text-sm" style="width:auto">Nova calculadora</a>
+       <a href="#" role="button" data-clear-saved class="btn-secondary h-12 px-5 text-sm text-danger" style="width:auto">Limpar tudo</a>
+     </div>
+     <div data-saved-empty class="mt-10 rounded-3xl border border-dashed border-line bg-white p-10 text-center">
+       <p class="font-display text-lg font-semibold text-ink">Nenhum cálculo salvo</p>
+       <p class="mt-2 text-sm text-ink-muted">Calcule em qualquer ferramenta e toque em Salvar.</p>
+       <a href="/#calculadoras" class="btn-primary mt-6 inline-flex h-12 px-6 text-sm" style="width:auto">Ver calculadoras</a>
+     </div>
+     <div data-saved-list class="mt-8 space-y-4"></div>`,
+    {
+      active: 'saved',
+      noindex: true,
+      extraScripts: '\n  <script type="module" src="/assets/js/salvos.js"></script>',
+    },
+  );
 }
 
 // --- emit files ---
@@ -969,6 +1015,7 @@ for (const c of CALCULATORS) {
 }
 write('privacidade/index.html', legalPage('privacy'));
 write('termos/index.html', legalPage('terms'));
+write('salvos/index.html', salvosPage());
 write(
   'sobre/index.html',
   simplePage(

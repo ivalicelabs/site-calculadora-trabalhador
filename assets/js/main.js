@@ -49,8 +49,7 @@ function initSearch() {
   if (hero) {
     const input = hero.querySelector('input[name="q"]');
     const run = () => renderSearchResults(results, searchCalculators(input.value));
-    hero.addEventListener('submit', (e) => {
-      e.preventDefault();
+    const submitSearch = () => {
       const items = searchCalculators(input.value);
       if (items.length === 1) {
         window.location.href = `/calculadoras/${items[0].slug}/`;
@@ -58,6 +57,14 @@ function initSearch() {
       }
       renderSearchResults(results, items);
       document.getElementById('calculadoras')?.scrollIntoView({ behavior: 'smooth' });
+    };
+    hero.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitSearch();
+    });
+    hero.querySelector('[data-hero-search-submit]')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      submitSearch();
     });
     input?.addEventListener('input', run);
   }

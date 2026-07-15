@@ -15,6 +15,8 @@ import {
 import { bindCurrencyMasks } from './money.js';
 import { getCalculator } from './site.js';
 
+const STORAGE_KEY = 'clt-saved-calcs';
+
 function money(form, name) {
   return parseBRLInput(form.elements[name]?.value ?? '0');
 }
@@ -30,6 +32,34 @@ function checked(form, name) {
 function parseDate(value) {
   const [y, m, d] = String(value).split('-').map(Number);
   return { year: y, month: m, day: d };
+}
+
+function collectFormValues(form) {
+  const values = {};
+  Array.from(form.elements).forEach((el) => {
+    if (!el.name || el.disabled) return;
+    if (el.type === 'checkbox') values[el.name] = !!el.checked;
+    else if (el.type === 'radio') {
+      if (el.checked) values[el.name] = el.value;
+    } else values[el.name] = el.value;
+  });
+  return values;
+}
+
+function applyFormValues(form, values) {
+  if (!values) return;
+  Object.entries(values).forEach(([name, value]) => {
+    const el = form.elements[name];
+    if (!el) return;
+    if (el.type === 'checkbox') el.checked = !!value;
+    else if (el.type === 'radio') {
+      const radios = form.elements[name];
+      const list = radios.length ? Array.from(radios) : [radios];
+      list.forEach((r) => {
+        r.checked = r.value === value;
+      });
+    } else el.value = value ?? '';
+  });
 }
 
 function runCalculator(id, form) {
@@ -243,18 +273,36 @@ function initSteppers(form) {
   });
 }
 
+function newSaveId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  return `s-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
 const form = document.getElementById('calc-form');
 if (form) {
   const id = form.getAttribute('data-calc-id');
   const results = document.getElementById('results');
   const valueEl = document.querySelector('[data-result-value]');
   const breakdownEl = document.querySelector('[data-breakdown]');
+  const slug = location.pathname.split('/').filter(Boolean).pop();
   initSteppers(form);
   bindCurrencyMasks(form);
   if (window.CltCurrencyMask) window.CltCurrencyMask.bindAll(form);
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  let lastSnapshot = null;
+
+  function showResult(primary, valueKey, rows) {
+    if (!primary.eligible && id === 'seguro_desemprego') {
+      valueEl.textContent = 'Não elegível';
+    } else {
+      valueEl.textContent = formatBRL(primary[valueKey] ?? 0);
+    }
+    renderRows(breakdownEl, rows);
+    results.hidden = false;
+  }
+
+  function runCalc(e) {
+    e?.preventDefault();
     form.querySelectorAll('input[data-currency]').forEach((input) => {
       if (window.CltCurrencyMask) window.CltCurrencyMask.applyMask(input);
       else if (input.value) {
@@ -269,22 +317,38 @@ if (form) {
     });
     try {
       const { primary, valueKey, rows } = runCalculator(id, form);
-      if (!primary.eligible && id === 'seguro_desemprego') {
-        valueEl.textContent = 'Não elegível';
-      } else {
-        valueEl.textContent = formatBRL(primary[valueKey] ?? 0);
-      }
-      renderRows(breakdownEl, rows(primary));
-      results.hidden = false;
+      const rowData = rows(primary);
+      showResult(primary, valueKey, rowData);
       results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      sessionStorage.setItem(`clt-save-${id}`, JSON.stringify({ at: Date.now(), primary, id }));
+      lastSnapshot = {
+        at: Date.now(),
+        calcId: id,
+        slug,
+        primary,
+        valueKey,
+        rows: rowData,
+        formValues: collectFormValues(form),
+        resultText: valueEl.textContent || '',
+        title: getCalculator(slug)?.title || id,
+      };
+      sessionStorage.setItem(`clt-save-${id}`, JSON.stringify(lastSnapshot));
     } catch (err) {
       alert(err.message || 'Não foi possível calcular. Verifique os dados.');
     }
+  }
+
+  form.addEventListener('submit', runCalc);
+  document.querySelector('[data-calc-submit]')?.addEventListener('click', runCalc);
+  form.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    if (e.target instanceof HTMLTextAreaElement) return;
+    if (e.target instanceof HTMLButtonElement) return;
+    e.preventDefault();
+    runCalc(e);
   });
 
-  document.querySelector('[data-share]')?.addEventListener('click', async () => {
-    const slug = location.pathname.split('/').filter(Boolean).pop();
+  document.querySelector('[data-share]')?.addEventListener('click', async (e) => {
+    e.preventDefault();
     const title = getCalculator(slug)?.title || 'Cálculo';
     const text = `${title}: ${valueEl?.textContent || ''} — ${location.href}`;
     try {
@@ -299,25 +363,67 @@ if (form) {
   });
 
   const saveBtn = document.querySelector('[data-save]');
-  saveBtn?.addEventListener('click', () => {
+  saveBtn?.addEventListener('click', (e) => {
+    if (saveBtn.getAttribute('href') === '/salvos/') return;
+    e.preventDefault();
     const raw = sessionStorage.getItem(`clt-save-${id}`);
-    if (!raw) {
+    const snapshot = lastSnapshot || (raw ? JSON.parse(raw) : null);
+    if (!snapshot) {
       alert('Calcule antes de salvar.');
       return;
     }
-    const key = 'clt-saved-calcs';
-    const list = JSON.parse(localStorage.getItem(key) || '[]');
-    const entry = JSON.parse(raw);
-    entry.title = getCalculator(location.pathname.split('/').filter(Boolean).pop())?.title || id;
-    entry.resultText = valueEl?.textContent || '';
+    const entry = {
+      ...snapshot,
+      id: newSaveId(),
+      at: Date.now(),
+      title: snapshot.title || getCalculator(slug)?.title || id,
+      resultText: valueEl?.textContent || snapshot.resultText || '',
+      slug,
+      calcId: id,
+      formValues: snapshot.formValues || collectFormValues(form),
+    };
+    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     list.unshift(entry);
-    localStorage.setItem(key, JSON.stringify(list.slice(0, 50)));
-    if (saveBtn) {
-      const prev = saveBtn.innerHTML;
-      saveBtn.textContent = 'Salvo neste aparelho';
-      setTimeout(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 50)));
+    const prev = saveBtn.innerHTML;
+    saveBtn.innerHTML = 'Salvo — ver lista';
+    saveBtn.setAttribute('href', '/salvos/');
+    setTimeout(() => {
+      if (saveBtn.getAttribute('href') === '/salvos/') {
         saveBtn.innerHTML = prev;
-      }, 1800);
-    }
+        saveBtn.setAttribute('href', '#');
+      }
+    }, 4000);
   });
+
+  function restoreFromSaved() {
+    const savedId = new URLSearchParams(location.search).get('saved');
+    if (!savedId) return;
+    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const entry = list.find((x) => String(x.id) === String(savedId));
+    if (!entry) return;
+
+    applyFormValues(form, entry.formValues);
+    if (window.CltCurrencyMask) window.CltCurrencyMask.bindAll(form);
+
+    if (entry.rows && entry.resultText != null) {
+      valueEl.textContent = entry.resultText;
+      renderRows(breakdownEl, entry.rows);
+      results.hidden = false;
+      lastSnapshot = { ...entry, calcId: id, slug };
+      sessionStorage.setItem(`clt-save-${id}`, JSON.stringify(lastSnapshot));
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    if (entry.formValues) {
+      try {
+        runCalc();
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
+  restoreFromSaved();
 }

@@ -72,6 +72,7 @@
       <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
         <a href="/" class="relative font-display text-[15px] font-medium text-ink-muted hover:text-brand">Início</a>
         <a href="/#calculadoras" class="relative font-display text-[15px] nav-active font-semibold text-brand">Calculadoras</a>
+        <a href="/salvos/" class="relative font-display text-[15px] font-medium text-ink-muted hover:text-brand">Salvos</a>
       </nav>
       <div class="hidden items-center gap-4 lg:flex">
         <label class="relative flex h-12 w-80 items-center gap-3 rounded-xl border border-line bg-white px-4">
@@ -87,6 +88,7 @@
       <nav class="flex flex-col gap-1 py-4 text-[15px]">
         <a href="/" class="rounded-lg px-3 py-2.5 font-semibold text-brand">Início</a>
         <a href="/#calculadoras" class="rounded-lg px-3 py-2.5 text-ink-muted">Calculadoras</a>
+        <a href="/salvos/" class="rounded-lg px-3 py-2.5 text-ink-muted">Salvos</a>
         <a href="/sobre/" class="rounded-lg px-3 py-2.5 text-ink-muted">Sobre</a>
         <a href="/contato/" class="rounded-lg px-3 py-2.5 text-ink-muted">Contato</a>
         <a href="/privacidade/" class="rounded-lg px-3 py-2.5 text-ink-muted">Privacidade</a>
@@ -127,7 +129,7 @@
         </label>
         <label class="block min-w-0 flex-1"><span class="field-label">Horas com adicional noturno</span><input class="field" name="nightHours" type="number" min="0"  value="" placeholder="0" ></label>
       </div>
-          <button type="submit" class="btn-primary">Calcular</button>
+          <a href="#results" role="button" data-calc-submit class="btn-primary">Calcular</a>
         </form>
 
         <section id="results" class="result-panel space-y-8" hidden>
@@ -141,14 +143,14 @@
             <p class="mt-4 text-sm italic text-ink-faint">* Estimativa com tabelas INSS/IRRF/Seguro 2026. Não substitui TRCT, contador ou advogado. Confira a legislação vigente.</p>
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
-            <button type="button" data-share class="btn-secondary">
+            <a href="#" role="button" data-share class="btn-secondary">
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M8 7l4-4 4 4"/></svg>
               Compartilhar
-            </button>
-            <button type="button" data-save class="btn-primary h-14 text-base">
+            </a>
+            <a href="#" role="button" data-save class="btn-primary h-14 text-base">
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
               Salvar
-            </button>
+            </a>
           </div>
         </section>
 
