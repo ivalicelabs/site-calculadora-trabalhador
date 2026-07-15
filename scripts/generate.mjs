@@ -284,7 +284,6 @@ function head({ title, description, keywords = '', canonical, active = '', jsonL
   <meta name="theme-color" content="#1b5e3b">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow">
-  <meta name="msvalidate.01" content="C3167EB3B20A17ED1DB7A92D187F402A">
   <meta name="author" content="${esc(SITE.org)}">
   <link rel="canonical" href="${absolute}">
   <link rel="alternate" hreflang="pt-BR" href="${absolute}">
