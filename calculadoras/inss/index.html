@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Tabela atualizada de contribuição previdenciária. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de INSS CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/inss/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Tabela atualizada de contribuição previdenciária. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"INSS","item":"https://clt.ivalice.com.br/calculadoras/inss/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O INSS é progressivo?","acceptedAnswer":{"@type":"Answer","text":"Sim. Cada faixa da tabela 2026 incide só sobre a parcela do salário dentro daquela faixa, até o teto."}},{"@type":"Question","name":"Há teto de contribuição?","acceptedAnswer":{"@type":"Answer","text":"Sim. Salários acima do teto previdenciário não geram desconto adicional de INSS do empregado."}},{"@type":"Question","name":"Quais alíquotas estão na tabela do site?","acceptedAnswer":{"@type":"Answer","text":"7,5%, 9%, 12% e 14% nas faixas publicadas em Tabelas 2026, até o teto de R$ 8.475,55."}},{"@type":"Question","name":"INSS reduz a base do IRRF?","acceptedAnswer":{"@type":"Answer","text":"Sim. O valor descontado de INSS entra no cálculo do imposto de renda retido. Veja a calculadora de IRRF ou salário líquido."}},{"@type":"Question","name":"Autônomo usa a mesma tabela?","acceptedAnswer":{"@type":"Answer","text":"Não necessariamente. Esta ferramenta foca a contribuição do empregado CLT em folha."}},{"@type":"Question","name":"O empregador também contribui?","acceptedAnswer":{"@type":"Answer","text":"Sim, há encargos patronais distintos. Aqui calculamos apenas a parte do empregado."}},{"@type":"Question","name":"Preciso da tabela oficial?","acceptedAnswer":{"@type":"Answer","text":"Sim, para conferência. Mantemos um resumo em /tabelas-2026/ alinhado às calculadoras."}},{"@type":"Question","name":"A estimativa substitui o holerite?","acceptedAnswer":{"@type":"Answer","text":"Não. Arredondamentos e bases específicas podem variar."}}]}</script>

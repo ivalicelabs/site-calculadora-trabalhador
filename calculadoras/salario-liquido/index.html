@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Quanto sobra após todos os descontos em folha. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Salário Líquido CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/salario-liquido/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Quanto sobra após todos os descontos em folha. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"Salário Líquido","item":"https://clt.ivalice.com.br/calculadoras/salario-liquido/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como é calculado o salário líquido?","acceptedAnswer":{"@type":"Answer","text":"Partimos do bruto, descontamos INSS progressivo e IRRF (com desconto simplificado e redução legal quando aplicável) e outros descontos informados."}},{"@type":"Question","name":"As tabelas são de qual ano?","acceptedAnswer":{"@type":"Answer","text":"Usamos as tabelas vigentes em 2026. O resultado é estimativa e não substitui o holerite oficial."}},{"@type":"Question","name":"O que entra no salário bruto desta calculadora?","acceptedAnswer":{"@type":"Answer","text":"O valor contratual do mês mais horas extras e outros proventos que você informar. Benefícios indenizatórios específicos podem ter tratamento diferente no holerite real."}},{"@type":"Question","name":"Como o INSS é descontado no líquido?","acceptedAnswer":{"@type":"Answer","text":"A contribuição do empregado é progressiva por faixas até o teto previdenciário de 2026. Cada faixa incide só sobre a parcela do salário que está nela. Detalhes na calculadora de INSS e em Tabelas 2026."}},{"@type":"Question","name":"O que é o desconto simplificado do IRRF?","acceptedAnswer":{"@type":"Answer","text":"Em 2026, o limite mensal do desconto simplificado é R$ 607,20. A ferramenta compara esse caminho com deduções legais (INSS, dependentes etc.) e usa o cenário mais vantajoso."}},{"@type":"Question","name":"Quem ganha até R$ 5.000 paga IRRF na folha?","acceptedAnswer":{"@type":"Answer","text":"Com a redução legal vigente para rendimentos tributáveis até R$ 5.000, o imposto mensal tende a zerar. Acima disso, aplica-se a tabela progressiva com as deduções cabíveis."}},{"@type":"Question","name":"Dependentes reduzem o IRRF?","acceptedAnswer":{"@type":"Answer","text":"Sim, quando o caminho de deduções legais for usado. Em 2026 a dedução por dependente na base mensal é R$ 189,59 (valor usado nas nossas tabelas)."}},{"@type":"Question","name":"FGTS entra no desconto do salário líquido?","acceptedAnswer":{"@type":"Answer","text":"Não. O FGTS (em regra 8%) é obrigação do empregador e não é descontado do holerite do empregado como o INSS. Use a calculadora de FGTS para o depósito."}},{"@type":"Question","name":"Vale-transporte e outros descontos entram?","acceptedAnswer":{"@type":"Answer","text":"Sim, pelo campo de outros descontos. O vale-transporte, quando descontado, costuma ser de até 6% do salário — informe o valor efetivo do seu holerite."}},{"@type":"Question","name":"Esta estimativa substitui o holerite?","acceptedAnswer":{"@type":"Answer","text":"Não. Acordos, convenções, benefícios e regras específicas da empresa podem alterar o resultado. Confira sempre o comprovante oficial e, se preciso, um profissional."}}]}</script>

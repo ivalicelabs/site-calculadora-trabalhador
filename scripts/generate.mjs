@@ -227,35 +227,10 @@ function head({
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${SITE.logo}">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   ${ldScript(allLd)}
 </head>
 <body class="min-h-screen bg-page text-ink antialiased" data-active="${active}">`;
@@ -1595,6 +1570,8 @@ Thumbs.db
 .idea/
 .vscode/
 node_modules/
+scripts/bin/
+assets/css/app.tailwind.css
 `,
 );
 

@@ -4,10 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "node scripts/generate.mjs",
+    "build:css": "node scripts/build-css.mjs",
+    "generate": "node scripts/generate.mjs && npm run build:css",
     "validate": "node scripts/validate-seo.mjs",
     "indexnow": "node scripts/notify-indexnow.mjs",
     "start": "python3 -m http.server 5173",
     "dev": "npm run generate && npm start"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
   }
 }

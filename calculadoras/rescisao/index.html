@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Simulação completa do contrato de trabalho. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Rescisão CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/rescisao/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Simulação completa do contrato de trabalho. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"Rescisão","item":"https://clt.ivalice.com.br/calculadoras/rescisao/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O aviso prévio é proporcional?","acceptedAnswer":{"@type":"Answer","text":"Sim. Consideramos 30 dias + 3 dias por ano completo de contrato, até o limite de 90 dias."}},{"@type":"Question","name":"O saldo de FGTS precisa ser informado?","acceptedAnswer":{"@type":"Answer","text":"É opcional. Se informado, usamos esse valor; senão, estimamos depósitos de 8% pelos meses de contrato."}},{"@type":"Question","name":"Quais verbas entram na rescisão?","acceptedAnswer":{"@type":"Answer","text":"Em geral: saldo de salário, férias vencidas/proporcionais + 1/3, 13º proporcional, aviso prévio quando devido, FGTS e multa conforme o tipo de demissão."}},{"@type":"Question","name":"Pedido de demissão tem multa de 40%?","acceptedAnswer":{"@type":"Answer","text":"Em regra não. A multa de 40% é típica da dispensa sem justa causa. No acordo, a multa costuma ser de 20%."}},{"@type":"Question","name":"Justa causa altera o cálculo?","acceptedAnswer":{"@type":"Answer","text":"Sim. Algumas verbas deixam de ser devidas. Selecione o tipo correto na ferramenta e confira a legislação/caso concreto."}},{"@type":"Question","name":"Posso simular seguro-desemprego junto?","acceptedAnswer":{"@type":"Answer","text":"Sim. Após a rescisão sem justa causa, use a calculadora de seguro-desemprego com a média salarial e o tempo de trabalho."}},{"@type":"Question","name":"O aviso pode ser indenizado?","acceptedAnswer":{"@type":"Answer","text":"Sim. Quando indenizado, o valor correspondente entra no acerto em vez do cumprimento trabalhado."}},{"@type":"Question","name":"A estimativa substitui o TRCT?","acceptedAnswer":{"@type":"Answer","text":"Não. O Termo de Rescisão e a análise de um profissional prevalecem."}}]}</script>

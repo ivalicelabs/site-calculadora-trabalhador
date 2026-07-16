@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Cálculo do Fundo de Garantia por Tempo de Serviço. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de FGTS CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/fgts/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Cálculo do Fundo de Garantia por Tempo de Serviço. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"FGTS","item":"https://clt.ivalice.com.br/calculadoras/fgts/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual o percentual do FGTS?","acceptedAnswer":{"@type":"Answer","text":"Em regra, o empregador deposita 8% do salário de contribuição na conta do FGTS do trabalhador."}},{"@type":"Question","name":"A multa de 40% entra no cálculo?","acceptedAnswer":{"@type":"Answer","text":"Você pode incluir a multa rescisória de 40% sobre o saldo estimado. Em acordo, a multa típica é de 20%."}},{"@type":"Question","name":"O FGTS é descontado do salário do empregado?","acceptedAnswer":{"@type":"Answer","text":"Não. O depósito é obrigação do empregador e não reduz o líquido do holerite como o INSS."}},{"@type":"Question","name":"Sobre qual base incide o 8%?","acceptedAnswer":{"@type":"Answer","text":"Em regra, sobre a remuneração que compõe o salário de contribuição do mês. Use o bruto contratual informado na ferramenta como aproximação."}},{"@type":"Question","name":"Posso simular vários meses de depósito?","acceptedAnswer":{"@type":"Answer","text":"Sim. Informe quantos meses deseja projetar; a calculadora multiplica o depósito mensal estimado por esse período."}},{"@type":"Question","name":"Quando a multa de 40% é devida?","acceptedAnswer":{"@type":"Answer","text":"Tipicamente na dispensa sem justa causa. No acordo (art. 484-A), a multa costuma ser de 20% sobre o saldo. Confira o tipo de rescisão."}},{"@type":"Question","name":"O saldo do extrato pode ser diferente da estimativa?","acceptedAnswer":{"@type":"Answer","text":"Sim. Depósitos históricos, saques e atualizações monetárias alteram o saldo. Prefira informar o saldo real na calculadora de rescisão."}},{"@type":"Question","name":"Esta ferramenta substitui o extrato da Caixa?","acceptedAnswer":{"@type":"Answer","text":"Não. É uma estimativa educativa. O extrato oficial do FGTS prevalece."}}]}</script>

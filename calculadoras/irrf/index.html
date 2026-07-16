@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Imposto de Renda Retido na Fonte com dependentes. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de IRRF CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/irrf/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Imposto de Renda Retido na Fonte com dependentes. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"IRRF","item":"https://clt.ivalice.com.br/calculadoras/irrf/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é o desconto simplificado?","acceptedAnswer":{"@type":"Answer","text":"Em 2026, o limite mensal do desconto simplificado é R$ 607,20. Usamos o cenário mais vantajoso frente às deduções legais."}},{"@type":"Question","name":"Quem ganha até R$ 5.000 paga IRRF?","acceptedAnswer":{"@type":"Answer","text":"Com a redução legal vigente, o imposto mensal tende a zerar para rendimentos tributáveis até R$ 5.000."}},{"@type":"Question","name":"Qual a dedução por dependente?","acceptedAnswer":{"@type":"Answer","text":"Nas tabelas do site para 2026, R$ 189,59 por dependente na base mensal."}},{"@type":"Question","name":"INSS entra no cálculo do IRRF?","acceptedAnswer":{"@type":"Answer","text":"Sim. O INSS descontado reduz a base ou entra na comparação com o desconto simplificado."}},{"@type":"Question","name":"Quais alíquotas a tabela usa?","acceptedAnswer":{"@type":"Answer","text":"Isento até R$ 2.428,80 de base; depois 7,5%, 15%, 22,5% e 27,5% com parcelas a deduzir — ver Tabelas 2026."}},{"@type":"Question","name":"IRRF de férias ou 13º é igual?","acceptedAnswer":{"@type":"Answer","text":"Podem ter particularidades de base e período. Use também as calculadoras de férias e 13º."}},{"@type":"Question","name":"Posso zerar o imposto só com dependentes?","acceptedAnswer":{"@type":"Answer","text":"Depende da renda e do caminho (deduções vs simplificado). Simule informando dependentes e INSS."}},{"@type":"Question","name":"A estimativa substitui a declaração anual?","acceptedAnswer":{"@type":"Answer","text":"Não. Trata-se de retenção mensal em folha. A ajuste anual é outro processo na Receita Federal."}}]}</script>

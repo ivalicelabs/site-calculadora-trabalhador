@@ -15,6 +15,7 @@ Site estático gerado por `scripts/generate.mjs` e publicado via GitHub Pages (`
 2. Guias e tabelas em `scripts/content-seo.mjs` (`guides()`, `tabelasBody()`).
 3. Helpers em `scripts/lib/html.mjs` e `scripts/lib/schema.mjs`.
 4. `node scripts/generate.mjs` escreve HTML, `sitemap.xml`, `robots.txt`, `llms.txt`.
+5. `npm run build:css` (ou via `npm run generate`) gera `assets/css/app.css` (Tailwind purged + `styles.css`). Sem CDN do Tailwind nem Google Fonts — fontes em `/assets/fonts/`.
 
 ## Runtime (navegador)
 

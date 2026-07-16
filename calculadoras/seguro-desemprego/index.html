@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Cálculo de parcelas e elegibilidade. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de Seguro Desemprego CLT 2026","url":"https://clt.ivalice.com.br/calculadoras/seguro-desemprego/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"description":"Cálculo de parcelas e elegibilidade. Calculadora gratuita com tabelas 2026. Resultado no navegador, sem cadastro.","inLanguage":"pt-BR","dateModified":"2026-07-16","publisher":{"@type":"Organization","name":"Ivalice Labs","url":"https://ivalice.com.br"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Calculadoras","item":"https://clt.ivalice.com.br/#calculadoras"},{"@type":"ListItem","position":3,"name":"Seguro Desemprego","item":"https://clt.ivalice.com.br/calculadoras/seguro-desemprego/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como é calculado o valor da parcela?","acceptedAnswer":{"@type":"Answer","text":"Com a média salarial e as faixas do MTE 2026 (80%, faixa intermediária ou teto), sem ficar abaixo do salário mínimo."}},{"@type":"Question","name":"Quantas parcelas tenho direito?","acceptedAnswer":{"@type":"Answer","text":"Depende do tempo trabalhado nos últimos 36 meses e se é 1ª, 2ª ou 3ª+ solicitação."}},{"@type":"Question","name":"Qual o piso e o teto da parcela no site?","acceptedAnswer":{"@type":"Answer","text":"Piso alinhado ao salário mínimo de R$ 1.621,00 e teto de parcela de R$ 2.518,65 (Tabelas 2026)."}},{"@type":"Question","name":"Pedido de demissão dá direito?","acceptedAnswer":{"@type":"Answer","text":"Em regra não. O benefício costuma exigir dispensa sem justa causa (e demais requisitos legais)."}},{"@type":"Question","name":"Preciso ter tempo mínimo de trabalho?","acceptedAnswer":{"@type":"Answer","text":"Sim. As faixas de parcelas dependem dos meses nos últimos 36 e do histórico de solicitações."}},{"@type":"Question","name":"A média usa quantos salários?","acceptedAnswer":{"@type":"Answer","text":"Na prática oficial entram os últimos salários conforme a regra do benefício; informe a média que constar na sua documentação."}},{"@type":"Question","name":"Posso simular depois da rescisão?","acceptedAnswer":{"@type":"Answer","text":"Sim. Calcule a rescisão e, em seguida, o seguro com a média e o tempo de vínculo."}},{"@type":"Question","name":"A estimativa garante o benefício?","acceptedAnswer":{"@type":"Answer","text":"Não. A habilitação é feita nos canais oficiais (governo). Esta ferramenta só estima valor e quantidade de parcelas."}}]}</script>

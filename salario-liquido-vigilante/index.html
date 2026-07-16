@@ -25,35 +25,10 @@
   <meta name="twitter:description" content="Estime o salário líquido de vigilante CLT: bruto, turnos, adicional noturno, INSS e IRRF. Calculadora gratuita.">
   <meta name="twitter:image" content="https://clt.ivalice.com.br/assets/img/logo.png">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1b5e3b', deep: '#1a5a4a', mint: '#e8f5e9' },
-            page: '#f9fafb',
-            ink: { DEFAULT: '#111827', muted: '#6b7280', faint: '#9ca3af', soft: '#687280' },
-            line: '#e5e7eb',
-            danger: '#dc2626',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
-          },
-          maxWidth: { site: '1440px', calc: '800px' },
-          boxShadow: {
-            card: '0 4px 12px rgba(0,0,0,0.03)',
-            hero: '0 8px 16px rgba(0,0,0,0.03)',
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/app.css" as="style">
+  <link rel="stylesheet" href="/assets/css/app.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Salário líquido de vigilante CLT — calculadora","dateModified":"2026-07-16","url":"https://clt.ivalice.com.br/salario-liquido-vigilante/","description":"Estime o salário líquido de vigilante CLT: bruto, turnos, adicional noturno, INSS e IRRF. Calculadora gratuita."}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Guia do Trabalhador Brasileiro","item":"https://clt.ivalice.com.br/"},{"@type":"ListItem","position":2,"name":"Salários por Profissão","item":"https://clt.ivalice.com.br/#salarios"},{"@type":"ListItem","position":3,"name":"Vigilante","item":"https://clt.ivalice.com.br/salario-liquido-vigilante/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual o salário médio de vigilante no Brasil?","acceptedAnswer":{"@type":"Answer","text":"Com base em dados CAGED processados pelo Portal Salário, a média nacional de salário-base CLT para Vigilante (CBO 5173-30) é cerca de R$ 2.084,53 (período 06/2025–05/2026). Esse valor não inclui adicionais variáveis do mês."}},{"@type":"Question","name":"Vigilante recebe adicional noturno?","acceptedAnswer":{"@type":"Answer","text":"Quando a jornada urbana ocorre entre 22h e 5h, a CLT prevê adicional noturno mínimo de 20%, salvo regra mais favorável."}},{"@type":"Question","name":"A média inclui periculosidade?","acceptedAnswer":{"@type":"Answer","text":"Não. A média CAGED é salário-base. Se houver adicional no holerite, some ao bruto na simulação."}},{"@type":"Question","name":"Como simular escala 12x36?","acceptedAnswer":{"@type":"Answer","text":"Use o total pago no mês como bruto. A calculadora não monta a escala; ela estima os descontos sobre o valor informado."}}]}</script>
