@@ -1164,7 +1164,7 @@ write(
     `<p>A <strong>${SITE.name}</strong> é um produto da <strong>${SITE.org}</strong>. Nosso objetivo é ajudar o trabalhador brasileiro a entender direitos e cálculos da CLT de forma simples e gratuita.</p>
      <p>As fórmulas seguem as mesmas regras do aplicativo Android. Sempre confira a legislação vigente e, em caso de dúvida, consulte um profissional.</p>
      <p>Contato: <a class="text-brand underline" href="mailto:${SITE.email}">${SITE.email}</a></p>
-     <p class="mt-6"><a class="font-semibold text-brand underline" href="/guias/">Ler guias</a> · <a class="font-semibold text-brand underline" href="/tabelas-${LEGISLATION_YEAR}/">Ver tabelas ${LEGISLATION_YEAR}</a></p>`,
+     <p class="mt-6"><a class="font-semibold text-brand underline" href="/guias/">Ler guias</a> · <a class="font-semibold text-brand underline" href="/tabelas-${LEGISLATION_YEAR}/">Ver tabelas ${LEGISLATION_YEAR}</a> · <a class="font-semibold text-brand underline" href="https://financiamento.ivalice.com.br/" rel="noopener">Financiamento</a> · <a class="font-semibold text-brand underline" href="https://investir.ivalice.com.br/" rel="noopener">Investir</a> · <a class="font-semibold text-brand underline" href="https://mei.ivalice.com.br/" rel="noopener">MEI</a> · <a class="font-semibold text-brand underline" href="https://churrasco.ivalice.com.br/" rel="noopener">Churrasco</a></p>`,
   ),
 );
 write(
@@ -1262,6 +1262,10 @@ ${GUIDE_LIST.map((g) => `- [${g.title}](${SITE.url}/guias/${g.slug}/): ${g.descr
 - [Sobre](${SITE.url}/sobre/)
 - [Contato](${SITE.url}/contato/): ${SITE.email}
 - [Ivalice Labs](https://ivalice.com.br/): empresa
+- [Financiamento](https://financiamento.ivalice.com.br/)
+- [Investir](https://investir.ivalice.com.br/)
+- [MEI](https://mei.ivalice.com.br/)
+- [Churrasco](https://churrasco.ivalice.com.br/)
 
 ## Optional
 - [Sitemap](${SITE.url}/sitemap.xml)

@@ -28,6 +28,10 @@ Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas 
 - [Sobre](https://clt.ivalice.com.br/sobre/)
 - [Contato](https://clt.ivalice.com.br/contato/): contato@ivalice.com.br
 - [Ivalice Labs](https://ivalice.com.br/): empresa
+- [Financiamento](https://financiamento.ivalice.com.br/)
+- [Investir](https://investir.ivalice.com.br/)
+- [MEI](https://mei.ivalice.com.br/)
+- [Churrasco](https://churrasco.ivalice.com.br/)
 
 ## Optional
 - [Sitemap](https://clt.ivalice.com.br/sitemap.xml)
