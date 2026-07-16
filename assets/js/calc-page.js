@@ -15,8 +15,6 @@ import {
 import { bindCurrencyMasks } from './money.js';
 import { getCalculator } from './site.js';
 
-const STORAGE_KEY = 'clt-saved-calcs';
-
 function money(form, name) {
   return parseBRLInput(form.elements[name]?.value ?? '0');
 }
@@ -32,34 +30,6 @@ function checked(form, name) {
 function parseDate(value) {
   const [y, m, d] = String(value).split('-').map(Number);
   return { year: y, month: m, day: d };
-}
-
-function collectFormValues(form) {
-  const values = {};
-  Array.from(form.elements).forEach((el) => {
-    if (!el.name || el.disabled) return;
-    if (el.type === 'checkbox') values[el.name] = !!el.checked;
-    else if (el.type === 'radio') {
-      if (el.checked) values[el.name] = el.value;
-    } else values[el.name] = el.value;
-  });
-  return values;
-}
-
-function applyFormValues(form, values) {
-  if (!values) return;
-  Object.entries(values).forEach(([name, value]) => {
-    const el = form.elements[name];
-    if (!el) return;
-    if (el.type === 'checkbox') el.checked = !!value;
-    else if (el.type === 'radio') {
-      const radios = form.elements[name];
-      const list = radios.length ? Array.from(radios) : [radios];
-      list.forEach((r) => {
-        r.checked = r.value === value;
-      });
-    } else el.value = value ?? '';
-  });
 }
 
 function runCalculator(id, form) {
@@ -273,11 +243,6 @@ function initSteppers(form) {
   });
 }
 
-function newSaveId() {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
-  return `s-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-}
-
 const form = document.getElementById('calc-form');
 if (form) {
   const id = form.getAttribute('data-calc-id');
@@ -288,8 +253,6 @@ if (form) {
   initSteppers(form);
   bindCurrencyMasks(form);
   if (window.CltCurrencyMask) window.CltCurrencyMask.bindAll(form);
-
-  let lastSnapshot = null;
 
   function showResult(primary, valueKey, rows) {
     if (!primary.eligible && id === 'seguro_desemprego') {
@@ -320,18 +283,6 @@ if (form) {
       const rowData = rows(primary);
       showResult(primary, valueKey, rowData);
       results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      lastSnapshot = {
-        at: Date.now(),
-        calcId: id,
-        slug,
-        primary,
-        valueKey,
-        rows: rowData,
-        formValues: collectFormValues(form),
-        resultText: valueEl.textContent || '',
-        title: getCalculator(slug)?.title || id,
-      };
-      sessionStorage.setItem(`clt-save-${id}`, JSON.stringify(lastSnapshot));
     } catch (err) {
       alert(err.message || 'Não foi possível calcular. Verifique os dados.');
     }
@@ -362,68 +313,67 @@ if (form) {
     }
   });
 
-  const saveBtn = document.querySelector('[data-save]');
-  saveBtn?.addEventListener('click', (e) => {
-    if (saveBtn.getAttribute('href') === '/salvos/') return;
-    e.preventDefault();
-    const raw = sessionStorage.getItem(`clt-save-${id}`);
-    const snapshot = lastSnapshot || (raw ? JSON.parse(raw) : null);
-    if (!snapshot) {
-      alert('Calcule antes de salvar.');
-      return;
-    }
-    const entry = {
-      ...snapshot,
-      id: newSaveId(),
-      at: Date.now(),
-      title: snapshot.title || getCalculator(slug)?.title || id,
-      resultText: valueEl?.textContent || snapshot.resultText || '',
-      slug,
-      calcId: id,
-      formValues: snapshot.formValues || collectFormValues(form),
-    };
-    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    list.unshift(entry);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 50)));
-    const prev = saveBtn.innerHTML;
-    saveBtn.innerHTML = 'Salvo — ver lista';
-    saveBtn.setAttribute('href', '/salvos/');
-    setTimeout(() => {
-      if (saveBtn.getAttribute('href') === '/salvos/') {
-        saveBtn.innerHTML = prev;
-        saveBtn.setAttribute('href', '#');
-      }
-    }, 4000);
-  });
-
-  function restoreFromSaved() {
-    const savedId = new URLSearchParams(location.search).get('saved');
-    if (!savedId) return;
-    const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const entry = list.find((x) => String(x.id) === String(savedId));
-    if (!entry) return;
-
-    applyFormValues(form, entry.formValues);
-    if (window.CltCurrencyMask) window.CltCurrencyMask.bindAll(form);
-
-    if (entry.rows && entry.resultText != null) {
-      valueEl.textContent = entry.resultText;
-      renderRows(breakdownEl, entry.rows);
-      results.hidden = false;
-      lastSnapshot = { ...entry, calcId: id, slug };
-      sessionStorage.setItem(`clt-save-${id}`, JSON.stringify(lastSnapshot));
-      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
-
-    if (entry.formValues) {
-      try {
-        runCalc();
-      } catch {
-        /* ignore */
-      }
+  /** Prefill via ?gross=4461.40 (médias por profissão). */
+  function setMoneyField(el, reais) {
+    if (!el) return;
+    const cents = Math.round(Number(reais) * 100);
+    if (!Number.isFinite(cents) || cents <= 0) return;
+    // A máscara trata dígitos como centavos: 446140 → 4.461,40
+    el.value = String(cents);
+    if (window.CltCurrencyMask?.applyMask) {
+      window.CltCurrencyMask.applyMask(el);
+    } else {
+      el.value = (cents / 100).toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
     }
   }
 
-  restoreFromSaved();
+  function restoreFromQuery() {
+    const params = new URLSearchParams(location.search);
+    const grossRaw = params.get('gross') || params.get('bruto');
+    if (!grossRaw) return false;
+
+    const raw = String(grossRaw).trim().replace(/\s/g, '');
+    const value = raw.includes(',')
+      ? Number(raw.replace(/\./g, '').replace(',', '.'))
+      : Number(raw);
+    if (!Number.isFinite(value) || value <= 0) return false;
+
+    const grossEl = form.querySelector('input[name="gross"]') || form.elements.gross;
+    if (!grossEl) return false;
+    setMoneyField(grossEl, value);
+
+    const depsRaw = params.get('dependents') ?? params.get('dependentes');
+    if (depsRaw != null && form.elements.dependents) {
+      const deps = Math.max(0, Math.min(20, Number(depsRaw) || 0));
+      form.elements.dependents.value = String(deps);
+    }
+
+    const overtimeRaw = params.get('overtime') ?? params.get('horaextra');
+    if (overtimeRaw != null) {
+      const ot = Number(String(overtimeRaw).trim().replace(',', '.'));
+      const otEl = form.querySelector('input[name="overtime"]');
+      if (otEl && Number.isFinite(ot) && ot >= 0) setMoneyField(otEl, ot);
+    }
+
+    try {
+      runCalc();
+    } catch {
+      /* ignore */
+    }
+    return true;
+  }
+
+  // Máscara (script defer) pode inicializar depois do module — tenta já e de novo no load.
+  restoreFromQuery();
+  window.addEventListener('load', () => {
+    const params = new URLSearchParams(location.search);
+    if (!(params.get('gross') || params.get('bruto'))) return;
+    const grossEl = form.querySelector('input[name="gross"]');
+    if (grossEl && !String(grossEl.value || '').replace(/\D/g, '')) {
+      restoreFromQuery();
+    }
+  });
 }

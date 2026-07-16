@@ -1,42 +1,14 @@
 /** Conteúdo SEO compartilhado pelo generate.mjs */
 
+import {
+  buildHowToBySlug,
+  buildRelatedBySlug,
+} from './content/calculators/index.mjs';
+
 export const INDEXNOW_KEY = 'a8f3c2e19b4d6075e1a29c84f6d0b357';
 
-export const HOWTO_BY_SLUG = {
-  'salario-liquido':
-    'Informe o salário bruto, horas extras, dependentes e outros descontos. Calculamos INSS progressivo e IRRF (com desconto simplificado e redução legal) para estimar o líquido.',
-  fgts:
-    'Use o salário bruto e os meses de depósito. O FGTS mensal é 8%. Opcionalmente simule a multa de 40% sobre o total depositado.',
-  ferias:
-    'Informe o salário, média de extras e dias de férias. Somamos o terço constitucional e, se marcado, o abono de 10 dias, com INSS/IRRF sobre o total.',
-  'decimo-terceiro':
-    'O 13º é proporcional aos meses do ano. Estimamos 1ª e 2ª parcela e aplicamos INSS/IRRF na segunda.',
-  rescisao:
-    'Com datas, tipo de demissão e saldo de férias, estimamos saldo, férias, 13º, aviso (30+3 dias/ano, máx. 90) e FGTS. Informe o saldo real de FGTS quando tiver.',
-  'hora-extra':
-    'A hora normal usa salário ÷ 220. Aplicamos 50% (úteis) ou 100% (domingo/feriado) e somamos adicional noturno se houver.',
-  'adicional-noturno':
-    'Calculamos 20% sobre a hora diurna para horas entre 22h e 5h (regra urbana padrão da CLT).',
-  inss:
-    'Aplicamos a tabela progressiva vigente faixa a faixa até o teto previdenciário do ano.',
-  'seguro-desemprego':
-    'Com a média salarial e meses nos últimos 36, usamos as faixas do MTE e as regras de 1ª/2ª/3ª+ solicitação para valor e número de parcelas.',
-  irrf:
-    'Partimos do rendimento, abatemos INSS/deduções ou o desconto simplificado (o mais vantajoso) e aplicamos tabela + redução para rendas até R$ 5.000.',
-};
-
-export const RELATED_BY_SLUG = {
-  'salario-liquido': ['inss', 'irrf', 'fgts', 'hora-extra'],
-  fgts: ['rescisao', 'salario-liquido', 'ferias'],
-  ferias: ['salario-liquido', 'decimo-terceiro', 'rescisao'],
-  'decimo-terceiro': ['salario-liquido', 'ferias', 'irrf'],
-  rescisao: ['fgts', 'seguro-desemprego', 'ferias', 'decimo-terceiro'],
-  'hora-extra': ['salario-liquido', 'adicional-noturno', 'inss'],
-  'adicional-noturno': ['hora-extra', 'salario-liquido'],
-  inss: ['salario-liquido', 'irrf', 'fgts'],
-  'seguro-desemprego': ['rescisao', 'salario-liquido', 'fgts'],
-  irrf: ['salario-liquido', 'inss', 'decimo-terceiro'],
-};
+export const HOWTO_BY_SLUG = buildHowToBySlug();
+export const RELATED_BY_SLUG = buildRelatedBySlug();
 
 export function guides(year) {
   return [
@@ -159,6 +131,13 @@ export function tabelasBody(year) {
       </table>
     </div>
     <p class="mt-3"><a class="text-brand font-semibold underline" href="/calculadoras/seguro-desemprego/">Calcular seguro-desemprego →</a></p>
+
+    <h2 class="mt-10 font-display text-2xl font-bold text-ink">FGTS</h2>
+    <p class="mt-3">Depósito mensal do empregador: em regra <strong>8%</strong> sobre a remuneração. Na dispensa sem justa causa, a multa típica é de <strong>40%</strong> sobre o saldo; no acordo, <strong>20%</strong>. O FGTS não é desconto do holerite do empregado.</p>
+    <p class="mt-3"><a class="text-brand font-semibold underline" href="/calculadoras/fgts/">Calcular FGTS →</a> · <a class="text-brand font-semibold underline" href="/calculadoras/rescisao/">Rescisão →</a></p>
+
+    <h2 class="mt-10 font-display text-2xl font-bold text-ink">Salário mínimo ${year}</h2>
+    <p class="mt-3">Valor de referência usado nas faixas de seguro-desemprego e como piso da parcela: <strong>R$ 1.621,00</strong> (mesmo valor da primeira faixa da tabela INSS ${year} neste site).</p>
 
     <p class="mt-10 text-sm text-ink-muted">Atualizado para uso nas ferramentas do site em ${year}. Em caso de divergência, prevalece a legislação oficial.</p>
   `;

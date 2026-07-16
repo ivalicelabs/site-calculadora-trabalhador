@@ -1,9 +1,9 @@
-# Calculadora do Trabalhador Brasileiro
-> Calculadoras CLT gratuitas com tabelas 2026: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego.
+# Guia do Trabalhador Brasileiro
+> Guia do Trabalhador Brasileiro com calculadoras CLT gratuitas, salário líquido, FGTS, férias, rescisão, INSS, 13º salário e direitos trabalhistas.
 
-Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas e não substituem holerite, TRCT ou orientação profissional.
+Portal brasileiro de calculadoras CLT e informações trabalhistas. Produto da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas e não substituem holerite, TRCT ou orientação profissional.
 
-## Calculadoras
+## Calculadoras CLT
 - [Salário Líquido](https://clt.ivalice.com.br/calculadoras/salario-liquido/): Quanto sobra após todos os descontos em folha.
 - [FGTS](https://clt.ivalice.com.br/calculadoras/fgts/): Cálculo do Fundo de Garantia por Tempo de Serviço.
 - [Férias](https://clt.ivalice.com.br/calculadoras/ferias/): Provisão de férias com 1/3 constitucional.
@@ -15,6 +15,24 @@ Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas 
 - [Seguro Desemprego](https://clt.ivalice.com.br/calculadoras/seguro-desemprego/): Cálculo de parcelas e elegibilidade.
 - [IRRF](https://clt.ivalice.com.br/calculadoras/irrf/): Imposto de Renda Retido na Fonte com dependentes.
 
+## Salários por Profissão
+- [Enfermeiro](https://clt.ivalice.com.br/salario-liquido-enfermeiro/): Estime o salário líquido de enfermeiro CLT: bruto, INSS, IRRF, adicional noturno e plantões. Calculadora gratuita com tabelas atualizadas. Média bruto ~R$ 4.461,40 (Portal Salário / CAGED (MTE)).
+- [Professor](https://clt.ivalice.com.br/salario-liquido-professor/): Calcule o salário líquido de professor CLT: aula, horas extras, INSS e IRRF. Simulação gratuita no navegador. Média bruto ~R$ 3.380,90 (Portal Salário / CAGED (MTE)).
+- [Motorista](https://clt.ivalice.com.br/salario-liquido-motorista/): Estime o salário líquido de motorista CLT com horas extras, adicional noturno, INSS e IRRF. Ferramenta gratuita. Média bruto ~R$ 2.703,60 (Portal Salário / CAGED (MTE)).
+- [Vendedor](https://clt.ivalice.com.br/salario-liquido-vendedor/): Calcule o salário líquido de vendedor CLT com salário fixo, comissões, INSS e IRRF. Simulação gratuita. Média bruto ~R$ 1.917,54 (Portal Salário / CAGED (MTE)).
+- [Auxiliar administrativo](https://clt.ivalice.com.br/salario-liquido-auxiliar-administrativo/): Estime o salário líquido de auxiliar administrativo CLT: bruto, INSS, IRRF e descontos. Calculadora gratuita. Média bruto ~R$ 2.057,43 (Portal Salário / CAGED (MTE)).
+- [Operador de caixa](https://clt.ivalice.com.br/salario-liquido-operador-de-caixa/): Calcule o salário líquido de operador de caixa CLT com extras, adicional noturno, INSS e IRRF. Média bruto ~R$ 1.861,27 (Portal Salário / CAGED (MTE)).
+- [Vigilante](https://clt.ivalice.com.br/salario-liquido-vigilante/): Estime o salário líquido de vigilante CLT: bruto, turnos, adicional noturno, INSS e IRRF. Calculadora gratuita. Média bruto ~R$ 2.084,53 (Portal Salário / CAGED (MTE)).
+- [Técnico de enfermagem](https://clt.ivalice.com.br/salario-liquido-tecnico-de-enfermagem/): Calcule o salário líquido de técnico de enfermagem CLT com plantões, noturno, INSS e IRRF. Média bruto ~R$ 2.518,06 (Portal Salário / CAGED (MTE)).
+- [Pedreiro](https://clt.ivalice.com.br/salario-liquido-pedreiro/): Estime o salário líquido de pedreiro CLT com horas extras, INSS e IRRF. Ferramenta gratuita. Média bruto ~R$ 2.541,50 (Portal Salário / CAGED (MTE)).
+- [Eletricista](https://clt.ivalice.com.br/salario-liquido-eletricista/): Calcule o salário líquido de eletricista CLT: bruto, extras, periculosidade, INSS e IRRF. Média bruto ~R$ 3.015,36 (Portal Salário / CAGED (MTE)).
+- [Mecânico](https://clt.ivalice.com.br/salario-liquido-mecanico/): Estime o salário líquido de mecânico de automóveis CLT com extras, INSS e IRRF. Média bruto ~R$ 2.220,12 (Portal Salário / CAGED (MTE)).
+- [Recepcionista](https://clt.ivalice.com.br/salario-liquido-recepcionista/): Calcule o salário líquido de recepcionista CLT: bruto, descontos, INSS e IRRF. Média bruto ~R$ 1.868,37 (Portal Salário / CAGED (MTE)).
+- [Garçom](https://clt.ivalice.com.br/salario-liquido-garcom/): Estime o salário líquido de garçom CLT. Atenção: gorjetas podem não estar no salário-base. Média bruto ~R$ 1.948,74 (Portal Salário / CAGED (MTE)).
+- [Auxiliar de limpeza](https://clt.ivalice.com.br/salario-liquido-auxiliar-de-limpeza/): Calcule o salário líquido de auxiliar de limpeza / faxineiro CLT com INSS e IRRF. Média bruto ~R$ 1.761,45 (Portal Salário / CAGED (MTE)).
+- [Programador](https://clt.ivalice.com.br/salario-liquido-programador/): Estime o salário líquido de programador / técnico em programação CLT com INSS e IRRF. Média bruto ~R$ 5.944,70 (Portal Salário / CAGED (MTE)).
+- [Engenheiro civil](https://clt.ivalice.com.br/salario-liquido-engenheiro-civil/): Calcule o salário líquido de engenheiro civil CLT com INSS, IRRF e descontos de folha. Média bruto ~R$ 9.661,63 (Portal Salário / CAGED (MTE)).
+
 ## Guias e tabelas
 - [Guias](https://clt.ivalice.com.br/guias/): artigos práticos CLT
 - [Como calcular o salário líquido CLT em 2026](https://clt.ivalice.com.br/guias/como-calcular-salario-liquido/): Passo a passo do salário líquido com INSS e IRRF 2026: o que desconta, dependentes e exemplos.
@@ -24,7 +42,7 @@ Site da Ivalice Labs. Cálculos rodam no navegador; resultados são estimativas 
 - [Tabelas 2026](https://clt.ivalice.com.br/tabelas-2026/): INSS, IRRF e seguro-desemprego
 
 ## Institucional
-- [Início](https://clt.ivalice.com.br/): lista de calculadoras
+- [Início](https://clt.ivalice.com.br/): calculadoras CLT e portal
 - [Sobre](https://clt.ivalice.com.br/sobre/)
 - [Contato](https://clt.ivalice.com.br/contato/): contato@ivalice.com.br
 - [Ivalice Labs](https://ivalice.com.br/): empresa

@@ -1,9 +1,9 @@
 export const SITE = {
-  name: 'Calculadora do Trabalhador Brasileiro',
-  shortName: 'Calculadora do Trabalhador',
+  name: 'Guia do Trabalhador Brasileiro',
+  shortName: 'Guia do Trabalhador',
   url: 'https://clt.ivalice.com.br',
   description:
-    'Calculadoras CLT gratuitas 2026: salário líquido, FGTS, férias, 13º, rescisão, INSS, IRRF e seguro-desemprego. Tabelas atualizadas.',
+    'Guia do Trabalhador Brasileiro com calculadoras CLT gratuitas, salário líquido, FGTS, férias, rescisão, INSS, 13º salário e direitos trabalhistas.',
   contactEmail: 'contato@ivalice.com.br',
   org: 'Ivalice Labs',
   version: '3.5.0',
